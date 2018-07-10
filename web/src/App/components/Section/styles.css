@@ -12,6 +12,7 @@
 
 :local(.title) {
   margin-bottom: 10px;
+  font-size: 30px;
 }
 
 :local(.description) {
@@ -20,5 +21,4 @@
 
 :local(.children) {
   margin-top: 40px;
-  composes: content from global;
 }
