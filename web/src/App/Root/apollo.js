@@ -3,6 +3,7 @@ import url from './url'
 
 export default createClient({
   endpointURL: url,
+  useSubscriptions: false,
   saveSession(session) {
     localStorage.setItem('session', JSON.stringify(session, null, 2))
   },
