@@ -25,7 +25,7 @@
     "meteor-paginated-graphql-react": "^1.5.2",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
-    "orionjs-react-autoform": "^1.0.0",
+    "orionjs-react-autoform": "^1.0.1",
     "orionsoft-parts": "^1.11.4",
     "payment-icons": "^1.1.0",
     "prop-types": "^15.6.2",
