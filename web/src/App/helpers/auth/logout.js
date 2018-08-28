@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import setSession from './setSession'
+import {setSession} from '@orion-js/graphql-client'
 
 export default async function() {
   await global.apolloClient.mutate({

@@ -1,5 +1,5 @@
 import React from 'react'
-import getSession from './getSession'
+import {getSession} from '@orion-js/graphql-client'
 import autobind from 'autobind-decorator'
 
 export default function(ComposedComponent) {
@@ -16,7 +16,7 @@ export default function(ComposedComponent) {
     }
 
     render() {
-      const session = getSession()
+      const session = getSession() || {}
       return <ComposedComponent {...this.props} session={session} />
     }
   }

@@ -10,7 +10,8 @@ export default class AutoFormField extends React.Component {
     field: PropTypes.object,
     fieldName: PropTypes.string,
     schemaToField: PropTypes.func,
-    only: PropTypes.string
+    only: PropTypes.string,
+    passProps: PropTypes.object
   }
 
   renderObjectFields(fields) {
@@ -21,30 +22,46 @@ export default class AutoFormField extends React.Component {
           field={fields[key]}
           fieldName={key}
           schemaToField={this.props.schemaToField}
+          passProps={this.props.passProps}
         />
       )
     })
   }
 
   renderField(field) {
-    const {type} = field
+    const {type, fieldOptions = {}} = field
     if (isArray(type) && isPlainObject(type[0])) {
-      const Component = this.props.schemaToField('array')
+      const Component = this.props.schemaToField({type: 'array'})
       return (
-        <Field fieldName={this.props.fieldName} type={Component}>
+        <Field
+          fieldName={this.props.fieldName}
+          type={Component}
+          {...fieldOptions}
+          {...this.props.passProps}>
           {this.renderObjectFields(type[0])}
         </Field>
       )
     } else if (isPlainObject(type)) {
-      const Component = this.props.schemaToField('plainObject')
+      const Component = this.props.schemaToField({type: 'plainObject'})
       return (
-        <Field fieldName={this.props.fieldName} type={Component}>
+        <Field
+          fieldName={this.props.fieldName}
+          type={Component}
+          {...fieldOptions}
+          {...this.props.passProps}>
           {this.renderObjectFields(type)}
         </Field>
       )
     } else {
-      const Component = this.props.schemaToField(type)
-      return <Field fieldName={this.props.fieldName} type={Component} />
+      const Component = this.props.schemaToField(field)
+      return (
+        <Field
+          fieldName={this.props.fieldName}
+          type={Component}
+          {...fieldOptions}
+          {...this.props.passProps}
+        />
+      )
     }
   }
 

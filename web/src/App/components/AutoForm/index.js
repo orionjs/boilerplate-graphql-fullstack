@@ -3,7 +3,7 @@ import styles from './styles.css'
 import PropTypes from 'prop-types'
 import WithParams from './WithParams'
 import Form from './Form'
-import schemaToField from '../schemaToField'
+import schemaToField from './schemaToField'
 import autobind from 'autobind-decorator'
 import Fields from './Fields'
 import WithMutation from './WithMutation'
@@ -17,6 +17,7 @@ export default class AutoForm extends React.Component {
     onChange: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     fragment: PropTypes.any,
+    getErrorFieldLabel: PropTypes.func,
     onSuccess: PropTypes.func,
     onValidationError: PropTypes.func,
     clean: PropTypes.func,
@@ -75,10 +76,11 @@ export default class AutoForm extends React.Component {
                   setRef={form => (this.form = form)}
                   doc={this.props.doc}
                   mutate={mutate}
-                  onChange={this.onChange}
+                  onChange={this.props.onChange}
                   params={params}
                   schema={this.props.schema || params}
                   onSuccess={this.props.onSuccess}
+                  getErrorFieldLabel={this.props.getErrorFieldLabel}
                   onValidationError={this.props.onValidationError}
                   clean={this.props.clean}
                   validate={this.props.validate}>

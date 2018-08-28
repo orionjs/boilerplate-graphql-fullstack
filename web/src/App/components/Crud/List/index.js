@@ -19,18 +19,30 @@ export default class List extends React.Component {
     singular: PropTypes.node,
     canCreate: PropTypes.bool,
     canUpdate: PropTypes.bool,
-    allowSearch: PropTypes.bool
+    allowSearch: PropTypes.bool,
+    params: PropTypes.object,
+    onSelect: PropTypes.func,
+    setRef: PropTypes.func,
+    queryFunctionName: PropTypes.string,
+    extraFields: PropTypes.object,
+    footer: PropTypes.any
   }
 
   static defaultProps = {
     title: 'List',
     fields: [{title: 'ID', name: '_id'}],
-    basePath: ''
+    basePath: '',
+    params: {},
+    setRef: () => {}
   }
 
   @autobind
-  onSelect({_id, amount}) {
-    this.props.history.push(`${this.props.basePath}/${_id}`)
+  onSelect(item) {
+    if (this.props.onSelect) {
+      this.props.onSelect(item)
+    } else {
+      this.props.history.push(`${this.props.basePath}/${item._id}`)
+    }
   }
 
   @autobind
@@ -50,17 +62,22 @@ export default class List extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <div className="content no-padding">
+        <div className="paginated-list no-padding">
           <WithParams name={this.props.name}>
             {({params}) => (
               <Paginated
+                ref={paginated => this.props.setRef(paginated)}
                 headTitle={this.props.title}
+                queryFunctionName={this.props.queryFunctionName}
                 queryName={this.props.name}
                 fields={this.props.fields}
                 onPress={this.onSelect}
                 params={params}
+                variables={this.props.params}
                 headCenterComponent={this.renderCenter}
                 headRightComponent={this.props.allowSearch ? undefined : () => <span />}
+                extraFields={this.props.extraFields}
+                footer={this.props.footer}
               />
             )}
           </WithParams>

@@ -25,7 +25,7 @@
     "meteor-paginated-graphql-react": "^1.5.2",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
-    "orionsoft-parts": "^1.11.1",
+    "orionsoft-parts": "^1.11.2",
     "payment-icons": "^1.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
@@ -39,6 +39,7 @@
     "react-router-dom": "^4.3.1",
     "react-select": "^1.2.1",
     "react-stripe-elements": "^2.0.1",
+    "react-transition-group": "^2.4.0",
     "rxjs": "^6.2.2",
     "simple-react-form": "^2.1.5",
     "unfetch": "^3.1.1"

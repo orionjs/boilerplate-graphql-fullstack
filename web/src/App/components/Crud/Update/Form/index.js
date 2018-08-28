@@ -30,6 +30,7 @@ export default class UpdateForm extends React.Component {
       [docField]: this.props.item
     }
   }
+
   getIdField({params}) {
     const keys = Object.keys(params)
     return keys.find(key => key.includes('Id'))

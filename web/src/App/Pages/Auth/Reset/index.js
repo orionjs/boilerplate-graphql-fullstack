@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import withUserId from 'App/helpers/auth/withUserId'
 import LoggedIn from '../LoggedIn'
 import withMessage from 'orionsoft-parts/lib/decorators/withMessage'
-import setSession from 'App/helpers/auth/setSession'
+import {setSession} from '@orion-js/graphql-client'
 
 @withUserId
 @withMessage
@@ -44,8 +44,8 @@ export default class ResetPassword extends React.Component {
   }
 
   @autobind
-  onSuccess(session) {
-    setSession(session)
+  async onSuccess(session) {
+    await setSession(session)
     this.props.showMessage('Your password has been changed')
     this.props.onLogin()
   }

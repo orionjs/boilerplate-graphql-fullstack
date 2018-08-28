@@ -6,5 +6,8 @@ import sendForgotPasswordToken from './sendForgotPasswordToken'
 export default getAuthResolvers({
   Users,
   sendEmailVerificationToken,
-  sendForgotPasswordToken
+  sendForgotPasswordToken,
+  twoFactor: {
+    issuer: 'Orionjs'
+  }
 })

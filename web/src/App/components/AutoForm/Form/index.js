@@ -18,6 +18,7 @@ export default class AutoFormForm extends React.Component {
     onChange: PropTypes.func,
     setRef: PropTypes.func,
     mutate: PropTypes.func,
+    getErrorFieldLabel: PropTypes.func,
     onSuccess: PropTypes.func,
     onValidationError: PropTypes.func,
     schema: PropTypes.object,
@@ -26,7 +27,8 @@ export default class AutoFormForm extends React.Component {
   }
 
   static defaultProps = {
-    onChange: () => {}
+    onChange: () => {},
+    getErrorFieldLabel: key => key
   }
 
   state = {}
@@ -55,7 +57,6 @@ export default class AutoFormForm extends React.Component {
         }
       }
     } else {
-      console.error(error)
       alert(error.message)
     }
   }
@@ -109,7 +110,7 @@ export default class AutoFormForm extends React.Component {
       const code = validationErrors[key]
       const keySchema = dotGetSchema(this.props.schema, key)
       if (!keySchema) continue
-      const label = keySchema.label || key
+      const label = keySchema.label || this.props.getErrorFieldLabel(key)
       const text = translate(`errors.${code}`, {doc, label: getInLocale(label)})
       messages[key] = text
     }

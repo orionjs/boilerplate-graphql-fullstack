@@ -6,7 +6,7 @@ import autobind from 'autobind-decorator'
 import styles from './styles.css'
 import Loading from 'orionsoft-parts/lib/components/Loading'
 import sleep from 'orionsoft-parts/lib/helpers/sleep'
-import setSession from 'App/helpers/auth/setSession'
+import {setSession} from '@orion-js/graphql-client'
 
 @withMutation(gql`
   mutation verifyEmail($token: String) {
@@ -38,7 +38,7 @@ export default class VerifyEmail extends React.Component {
       const {session} = await this.props.verifyEmail({
         token: this.props.token
       })
-      setSession(session)
+      await setSession(session)
       this.props.onLogin()
     } catch (error) {
       if (error.message.includes('Validation Error')) {

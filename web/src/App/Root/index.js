@@ -4,6 +4,7 @@ import {ApolloProvider} from 'react-apollo'
 import OrionsoftProvider from 'orionsoft-parts/lib/components/Provider'
 import './locale'
 import PropTypes from 'prop-types'
+import TwoFactorPromptProvider from './TwoFactorPromptProvider'
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -13,7 +14,9 @@ export default class Root extends React.Component {
   render() {
     return (
       <ApolloProvider client={apolloClient}>
-        <OrionsoftProvider meProvider={false}>{this.props.children}</OrionsoftProvider>
+        <OrionsoftProvider meProvider={false}>
+          <TwoFactorPromptProvider>{this.props.children}</TwoFactorPromptProvider>
+        </OrionsoftProvider>
       </ApolloProvider>
     )
   }
