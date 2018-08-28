@@ -4966,9 +4966,17 @@ original@>=0.0.5:
   dependencies:
     url-parse "1.0.x"
 
-orionsoft-parts@^1.11.2:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/orionsoft-parts/-/orionsoft-parts-1.11.2.tgz#8b992d89f394e80e22250331c03b99b6afbcd7bd"
+orionjs-react-autoform@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/orionjs-react-autoform/-/orionjs-react-autoform-1.0.0.tgz#5405ff835319cdd438b5d096387a1452c9933664"
+  dependencies:
+    autobind-decorator "^2.1.0"
+    lodash "^4.17.10"
+    prop-types "^15.6.2"
+
+orionsoft-parts@^1.11.4:
+  version "1.11.4"
+  resolved "https://registry.yarnpkg.com/orionsoft-parts/-/orionsoft-parts-1.11.4.tgz#48d18efe5ec4918c3a41ae5fb4d239fb3de3165d"
   dependencies:
     autobind-decorator "^2.1.0"
     boron "^0.2.3"

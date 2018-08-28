@@ -6,18 +6,12 @@ export default new Model({
     firstName: {
       type: String,
       min: 2,
-      label: {
-        en: 'First name',
-        es: 'Nombre'
-      }
+      label: 'First name'
     },
     lastName: {
       type: String,
       min: 2,
-      label: {
-        en: 'Last name',
-        es: 'Apellido'
-      }
+      label: 'Last name'
     }
   },
   resolvers: {
