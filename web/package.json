@@ -6,7 +6,7 @@
     "babel-plugin-module-resolver": "^3.1.1",
     "eslint-config-orionsoft": "^1.2.1",
     "orionsoft-react-scripts": "^1.0.10",
-    "react-dev-utils": "^4.0.0"
+    "react-dev-utils": "^5.0.2"
   },
   "dependencies": {
     "@orion-js/graphql-client": "^0.7.0",
