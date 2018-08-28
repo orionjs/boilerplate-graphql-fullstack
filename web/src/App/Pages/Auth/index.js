@@ -44,7 +44,7 @@ export default class Auth extends React.Component {
   render() {
     const otherProps = {onLogin: this.onLogin}
     return (
-      <div className={styles.container} style={{minHeight: window.innerHeight}}>
+      <div className={styles.container}>
         <div className={styles.content}>
           {this.renderLogo()}
           <Switch>
