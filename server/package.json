@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@orion-js/app": "^0.7.2",
-    "@orion-js/auth": "^0.7.2",
+    "@orion-js/auth": "^0.7.3",
     "@orion-js/graphql": "^0.7.2",
     "@orion-js/jobs": "^0.7.2",
     "@orion-js/mailing": "^0.7.2",

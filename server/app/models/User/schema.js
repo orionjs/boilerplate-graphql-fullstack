@@ -16,7 +16,8 @@ export default {
     private: true
   },
   profile: {
-    type: UserProfile
+    type: UserProfile,
+    label: 'Profile'
   },
   roles: {
     type: ['ID'],

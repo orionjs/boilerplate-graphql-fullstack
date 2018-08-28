@@ -16,9 +16,9 @@
     path-match "^1.2.4"
     path-to-regexp "^2.3.0"
 
-"@orion-js/auth@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@orion-js/auth/-/auth-0.7.2.tgz#80d35b6df5d9124abcc7afda31d16a50753cae97"
+"@orion-js/auth@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@orion-js/auth/-/auth-0.7.3.tgz#aed5691505cecf7254fa64dc0fcc4c059ae01303"
   dependencies:
     bcryptjs "^2.4.3"
     jssha "^2.3.1"
