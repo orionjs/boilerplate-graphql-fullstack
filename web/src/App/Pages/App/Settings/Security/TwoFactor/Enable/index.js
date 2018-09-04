@@ -39,7 +39,7 @@ export default class Enable extends React.Component {
   async generate() {
     try {
       const {result} = await this.props.generateTwoFactorSecret()
-      this.props.showMessage('Ahora debes confirmar el código desde la app')
+      this.props.showMessage('Now you must confirm the code form your app')
       this.setState(result)
     } catch (error) {
       this.props.showMessage(error)
@@ -50,7 +50,7 @@ export default class Enable extends React.Component {
   async activate() {
     try {
       await this.props.activateTwoFactor({code: this.state.code})
-      this.props.showMessage('Se ha activado autenticación de dos factores en tu cuenta')
+      this.props.showMessage('Two factor authentication has been enabled')
     } catch (error) {
       this.props.showMessage(error)
     }
@@ -60,10 +60,10 @@ export default class Enable extends React.Component {
     if (this.state.base32) return
     return (
       <div>
-        <div>Configurar autenticación de dos factores</div>
+        <div>Enable two factor authentication</div>
         <br />
         <Button onClick={this.generate} primary>
-          Empezar
+          Start
         </Button>
       </div>
     )
@@ -74,7 +74,7 @@ export default class Enable extends React.Component {
     return (
       <div>
         <p className={styles.instructionStep}>
-          1. Descarga la aplicación de autentificación en el AppStore o PlayStore
+          1. Download the Two Factor app from the AppStore or PlayStore
         </p>
         <div>
           <a
@@ -98,23 +98,19 @@ export default class Enable extends React.Component {
             />
           </a>
         </div>
-        <p className={styles.instructionStep}>
-          2. Escanea este QR con tu aplicación de autentificación
-        </p>
+        <p className={styles.instructionStep}>2. Scan the QR code with the application</p>
         <div style={{width: 250}} dangerouslySetInnerHTML={{__html: this.state.qrCode}} />
         <p className={styles.addManually}>
-          O agrega manualmente el código{' '}
+          Or manually add the code{' '}
           <code className={styles.addManuallyPre}>{this.state.base32}</code>
         </p>
         <br />
-        <p className={styles.instructionStep}>
-          3. Escribe el código de 6 dígitos que aparece en tu aplicación para confirmar
-        </p>
+        <p className={styles.instructionStep}>3. Write the 6 digit code to confirm</p>
         <Form state={this.state} onChange={changes => this.setState(changes)}>
           <Field fieldName="code" type={SixDigitInput} />
         </Form>
         <br />
-        <Button onClick={this.activate}>Confirmar</Button>
+        <Button onClick={this.activate}>Confirm</Button>
       </div>
     )
   }

@@ -35,8 +35,8 @@ export default class TwoFactor extends React.Component {
       <div className={styles.container}>
         <Section
           top
-          title="Autenticación de dos factores"
-          description="La autenticación de dos factores es una medida de protección adicional para tu cuenta que se diseñó para garantizar que únicamente tú puedas acceder, aunque alguien más conozca la contraseña">
+          title="Two factor authentication"
+          description="Two-factor authentication (2FA) adds an additional layer of protection beyond passwords">
           {this.renderDisable()}
           {this.renderEnable()}
         </Section>
