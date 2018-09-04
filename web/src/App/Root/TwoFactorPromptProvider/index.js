@@ -64,14 +64,14 @@ export default class Prompt extends React.Component {
             <IconButton icon={CloseIcon} size={20} onPress={this.cancel} />
           </div>
           <div className={styles.content}>
-            <div className={styles.title}>Autenticación de dos factores</div>
+            <div className={styles.title}>Two factor authentication</div>
             <div className={styles.form}>
               <Form state={this.state} onChange={changes => this.setState(changes)}>
                 <Field fieldName="code" type={SixDigitInput} onReady={this.confirm} />
               </Form>
             </div>
             <div className={styles.description}>
-              Por favor introduce el código desde tu app para continuar
+              Please introduce your the code in your authentication app to continue
             </div>
           </div>
         </div>
