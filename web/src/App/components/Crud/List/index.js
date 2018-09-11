@@ -63,7 +63,7 @@ export default class List extends React.Component {
     return (
       <div className={styles.container}>
         <div className="paginated-list no-padding">
-          <WithParams name={this.props.name}>
+          <WithParams name={this.props.name} mutation={false}>
             {({params}) => (
               <Paginated
                 ref={paginated => this.props.setRef(paginated)}
