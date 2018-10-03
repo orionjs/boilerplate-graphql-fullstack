@@ -21,18 +21,12 @@ export default class ChangePassword extends React.Component {
   schema = {
     oldPassword: {
       type: String,
-      label: {
-        en: 'Current password',
-        es: 'Contraseña actual'
-      }
+      label: 'Current password'
     },
     newPassword: {
       type: String,
       min: 8,
-      label: {
-        en: 'New password',
-        es: 'Contraseña nueva'
-      }
+      label: 'New password'
     },
     confirm: {
       type: String,
@@ -46,49 +40,46 @@ export default class ChangePassword extends React.Component {
           return 'passwordsDontMatch'
         }
       },
-      label: {
-        en: 'Confirm the new password',
-        es: 'Confirma la contraseña nueva'
-      }
+      label: 'Confirm the new password'
     }
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <Section title="Cambiar contraseña" description="Cambia tu contraseña">
+        <Section title="Change password" description="Change your password">
           <AutoForm
             mutation="changePassword"
             ref="form"
             onSuccess={() => this.props.showMessage('Your password was changed')}
             schema={this.schema}>
-            <div className="label">Contraseña actual</div>
+            <div className="label">Current password</div>
             <Field
               fieldName="oldPassword"
               fieldType="password"
-              placeholder="Contraseña actual"
+              placeholder="Current password"
               type={Text}
             />
             <div className={styles.divider} />
-            <div className="label">Nueva contraseña</div>
+            <div className="label">New password</div>
             <Field
               fieldName="newPassword"
               fieldType="password"
-              placeholder="Nueva contraseña"
+              placeholder="New password"
               type={Text}
             />
-            <div className="description">Tu contraseña debe tener al menos 6 caracteres</div>
-            <div className="label">Confirmar contraseña</div>
+            <div className="description">Your password must have at least 6 characters</div>
+            <div className="label">Confirm your password</div>
             <Field
               fieldName="confirm"
               fieldType="password"
-              placeholder="Repite tu contraseña nueva"
+              placeholder="Repeat your new password"
               type={Text}
             />
           </AutoForm>
           <br />
           <Button icon={LockIcon} onClick={() => this.refs.form.submit()} primary>
-            Cambiar contraseña
+            Change password
           </Button>
         </Section>
       </div>

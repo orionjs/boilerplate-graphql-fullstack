@@ -24,7 +24,7 @@ export default class Layout extends React.Component {
           <Tabs
             items={[
               {title: 'Profile', path: '/settings'},
-              {title: 'Seguridad', path: '/settings/security'}
+              {title: 'Security', path: '/settings/security'}
             ]}
           />
         </div>

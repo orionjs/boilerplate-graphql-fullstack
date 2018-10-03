@@ -13,6 +13,7 @@ import {setSession} from '@orion-js/graphql-client'
     session: verifyEmail(token: $token) {
       _id
       userId
+      roles
       publicKey
       secretKey
     }
@@ -42,7 +43,7 @@ export default class VerifyEmail extends React.Component {
       this.props.onLogin()
     } catch (error) {
       if (error.message.includes('Validation Error')) {
-        this.setState({errorMessage: 'El código de verificación expiró'})
+        this.setState({errorMessage: 'The verification code expired'})
       } else {
         this.setState({errorMessage: error.message})
       }
@@ -56,7 +57,7 @@ export default class VerifyEmail extends React.Component {
     return (
       <div className={styles.loading}>
         <Loading size={40} />
-        <p>Se esta verificando tu email</p>
+        <p>We are verifying your email</p>
       </div>
     )
   }

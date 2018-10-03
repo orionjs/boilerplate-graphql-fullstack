@@ -29,7 +29,7 @@ export default class Auth extends React.Component {
     if (location.state && location.state.nextPathname) {
       this.props.history.replace(location.state.nextPathname)
     } else {
-      this.props.history.replace('/dashboard') // redirect to root logged in url
+      this.props.history.replace('/dashboard')
     }
   }
 
@@ -46,24 +46,26 @@ export default class Auth extends React.Component {
     return (
       <div className={styles.container}>
         <div className={styles.content}>
-          {this.renderLogo()}
-          <Switch>
-            <Route path="/login" render={() => <Login {...otherProps} />} />
-            <Route path="/register" render={() => <Register {...otherProps} />} />
-            <Route
-              path="/verify-email/:token"
-              render={({match}) => <VerifyEmail token={match.params.token} {...otherProps} />}
-            />
-            <Route path="/forgot" render={() => <Forgot {...otherProps} />} />
-            <Route
-              path="/reset/:token"
-              render={({match}) => <Reset token={match.params.token} {...otherProps} />}
-            />
-            <Route
-              path="/enroll/:token"
-              render={({match}) => <Enroll token={match.params.token} {...otherProps} />}
-            />
-          </Switch>
+          <div className={styles.contentInner}>
+            {this.renderLogo()}
+            <Switch>
+              <Route path="/login" render={() => <Login {...otherProps} />} />
+              <Route path="/register" render={() => <Register {...otherProps} />} />
+              <Route
+                path="/verify-email/:token"
+                render={({match}) => <VerifyEmail token={match.params.token} {...otherProps} />}
+              />
+              <Route path="/forgot" render={() => <Forgot {...otherProps} />} />
+              <Route
+                path="/reset/:token"
+                render={({match}) => <Reset token={match.params.token} {...otherProps} />}
+              />
+              <Route
+                path="/enroll/:token"
+                render={({match}) => <Enroll token={match.params.token} {...otherProps} />}
+              />
+            </Switch>
+          </div>
         </div>
         <div className={styles.photo} />
       </div>

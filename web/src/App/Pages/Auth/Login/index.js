@@ -14,7 +14,8 @@ import {setSession} from '@orion-js/graphql-client'
 export default class Login extends React.Component {
   static propTypes = {
     onLogin: PropTypes.func,
-    userId: PropTypes.string
+    userId: PropTypes.string,
+    loading: PropTypes.bool
   }
 
   @autobind
@@ -24,12 +25,12 @@ export default class Login extends React.Component {
   }
 
   render() {
-    if (this.props.userId) return <LoggedIn />
+    if (!this.props.loading && this.props.userId) return <LoggedIn />
     return (
       <div>
         <AutoForm mutation="loginWithPassword" ref="form" onSuccess={this.onSuccess}>
           <div className="label">Email</div>
-          <Field fieldName="email" type={Text} placeholder="Email" />
+          <Field fieldName="email" type={Text} fieldType="email" placeholder="Email" />
           <div className="label">Password</div>
           <Field fieldName="password" type={Text} fieldType="password" placeholder="Password" />
           <div className="description">
@@ -37,15 +38,12 @@ export default class Login extends React.Component {
           </div>
         </AutoForm>
         <br />
-        <Button onClick={() => this.refs.form.submit()} primary>
-          Login
+        <Button style={{marginRight: 10}} to="/register">
+          Create an account
         </Button>
-        <br />
-        <br />
-        <div>
-          If you don
-          {"'"}t have an account, <Link to="/register">Register</Link>
-        </div>
+        <Button onClick={() => this.refs.form.submit()} primary loading={this.props.loading}>
+          Log in
+        </Button>
       </div>
     )
   }

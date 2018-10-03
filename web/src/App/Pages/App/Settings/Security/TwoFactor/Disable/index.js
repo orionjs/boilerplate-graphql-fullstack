@@ -37,7 +37,9 @@ export default class Disable extends React.Component {
     return (
       <div className={styles.container}>
         <HasTwoFactorIcon size={28} className={styles.twoFactorActivatedIcon} />
-        <span className={styles.twoFactorActivatedText}>Two factor authentication activated</span>
+        <span className={styles.twoFactorActivatedText}>
+          Two factor authentication activated
+        </span>
         <div className={styles.yourAccountIsSecure}>Your account is safer</div>
         <br />
         <Button danger onClick={this.disableTwoFactor}>

@@ -8,7 +8,9 @@ export default class Logo extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <Link to="/">Orionjs</Link>
+        <Link to="/">
+          <img className={styles.logo} src="/dark.svg" alt="Logo" />
+        </Link>
       </div>
     )
   }

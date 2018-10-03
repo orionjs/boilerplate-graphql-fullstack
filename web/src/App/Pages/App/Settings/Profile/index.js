@@ -40,7 +40,7 @@ export default class Profile extends React.Component {
     if (!this.props.me) return
     return (
       <div className={styles.container}>
-        <Section top title="Perfil" description="Edita tus datos personales">
+        <Section top title="Profile" description="Update your personal information">
           <AutoForm
             mutation="setUserProfile"
             ref="form"
@@ -51,7 +51,7 @@ export default class Profile extends React.Component {
           />
           <br />
           <Button onClick={() => this.refs.form.submit()} primary>
-            Guardar
+            Save
           </Button>
         </Section>
       </div>

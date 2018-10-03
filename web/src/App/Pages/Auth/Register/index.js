@@ -32,28 +32,28 @@ export default class Register extends React.Component {
           <Field fieldName="profile" type={ObjectField} style={null}>
             <div className="row">
               <div className="col-xs-12 col-sm-6">
-                <div className="label">Nombre</div>
-                <Field fieldName="firstName" type={Text} placeholder="Nombre" />
+                <div className="label">Name</div>
+                <Field fieldName="firstName" type={Text} placeholder="Name" />
               </div>
               <div className="col-xs-12 col-sm-6">
-                <div className="label">Apellido</div>
-                <Field fieldName="lastName" type={Text} placeholder="Apellido" />
+                <div className="label">Last name</div>
+                <Field fieldName="lastName" type={Text} placeholder="Last name" />
               </div>
             </div>
           </Field>
           <div className="label">Email</div>
           <Field fieldName="email" type={Text} fieldType="email" placeholder="Email" />
-          <div className="label">Contraseña</div>
-          <Field fieldName="password" type={Text} fieldType="password" placeholder="Contraseña" />
+          <div className="label">Password</div>
+          <Field fieldName="password" type={Text} fieldType="password" placeholder="Password" />
         </AutoForm>
         <br />
         <Button onClick={() => this.refs.form.submit()} primary>
-          Registrarme
+          Create account
         </Button>
         <br />
         <br />
         <div>
-          Si ya tienes una cuenta <Link to="/login">Entra</Link>
+          If you have an account <Link to="/login">Log in</Link>
         </div>
       </div>
     )

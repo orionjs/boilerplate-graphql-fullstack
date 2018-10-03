@@ -3,8 +3,7 @@
   margin-bottom: 40px;
 }
 
-:local(.container) a {
-  color: #111;
-  font-size: 30px;
-  font-weight: bold;
+:local(.logo) {
+  max-width: 80%;
+  height: 60px;
 }

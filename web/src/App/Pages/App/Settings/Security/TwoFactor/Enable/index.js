@@ -98,14 +98,18 @@ export default class Enable extends React.Component {
             />
           </a>
         </div>
-        <p className={styles.instructionStep}>2. Scan the QR code with the application</p>
+        <p className={styles.instructionStep}>
+          2. Scan the QR code with the application
+        </p>
         <div style={{width: 250}} dangerouslySetInnerHTML={{__html: this.state.qrCode}} />
         <p className={styles.addManually}>
           Or manually add the code{' '}
           <code className={styles.addManuallyPre}>{this.state.base32}</code>
         </p>
         <br />
-        <p className={styles.instructionStep}>3. Write the 6 digit code to confirm</p>
+        <p className={styles.instructionStep}>
+          3. Write the 6 digit code to confirm
+        </p>
         <Form state={this.state} onChange={changes => this.setState(changes)}>
           <Field fieldName="code" type={SixDigitInput} />
         </Form>
