@@ -8,6 +8,7 @@ import Breadcrumbs from 'App/components/Breadcrumbs'
 import Container from 'orionsoft-parts/lib/components/Container'
 import forceLogin from 'App/helpers/auth/forceLogin'
 import Security from './Security'
+import Translate from 'App/i18n'
 
 @forceLogin
 export default class Layout extends React.Component {
@@ -19,12 +20,14 @@ export default class Layout extends React.Component {
     return (
       <div>
         <div className={styles.header}>
-          <Breadcrumbs>Settings</Breadcrumbs>
+          <Breadcrumbs>
+            <Translate tr="settings.title" />
+          </Breadcrumbs>
           <br />
           <Tabs
             items={[
-              {title: 'Profile', path: '/settings'},
-              {title: 'Security', path: '/settings/security'}
+              {title: <Translate tr="settings.profile" />, path: '/settings'},
+              {title: <Translate tr="settings.security" />, path: '/settings/security'}
             ]}
           />
         </div>

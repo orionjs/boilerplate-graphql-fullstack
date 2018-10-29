@@ -8,6 +8,7 @@ import withMessage from 'orionsoft-parts/lib/decorators/withMessage'
 import Button from 'orionsoft-parts/lib/components/Button'
 import {Form, Field} from 'simple-react-form'
 import SixDigitInput from 'App/components/fields/SixDigitInput'
+import Translate from 'App/i18n'
 
 @withMutation(gql`
   mutation generateTwoFactorSecret {
@@ -39,7 +40,7 @@ export default class Enable extends React.Component {
   async generate() {
     try {
       const {result} = await this.props.generateTwoFactorSecret()
-      this.props.showMessage('Now you must confirm the code form your app')
+      this.props.showMessage(<Translate tr="settings.twoFactorNowYouMustConfirm" />)
       this.setState(result)
     } catch (error) {
       this.props.showMessage(error)
@@ -50,7 +51,7 @@ export default class Enable extends React.Component {
   async activate() {
     try {
       await this.props.activateTwoFactor({code: this.state.code})
-      this.props.showMessage('Two factor authentication has been enabled')
+      this.props.showMessage(<Translate tr="settings.twoFactorEnabled" />)
     } catch (error) {
       this.props.showMessage(error)
     }
@@ -60,10 +61,12 @@ export default class Enable extends React.Component {
     if (this.state.base32) return
     return (
       <div>
-        <div>Enable two factor authentication</div>
+        <div>
+          <Translate tr="settings.enableTwoFactor" />
+        </div>
         <br />
         <Button onClick={this.generate} primary>
-          Start
+          <Translate tr="global.start" />
         </Button>
       </div>
     )
@@ -74,7 +77,7 @@ export default class Enable extends React.Component {
     return (
       <div>
         <p className={styles.instructionStep}>
-          1. Download the Two Factor app from the AppStore or PlayStore
+          <Translate tr="settings.twoFactorStep1" />
         </p>
         <div>
           <a
@@ -99,22 +102,24 @@ export default class Enable extends React.Component {
           </a>
         </div>
         <p className={styles.instructionStep}>
-          2. Scan the QR code with the application
+          <Translate tr="settings.twoFactorStep2" />
         </p>
         <div style={{width: 250}} dangerouslySetInnerHTML={{__html: this.state.qrCode}} />
         <p className={styles.addManually}>
-          Or manually add the code{' '}
+          <Translate tr="settings.twoFactorOrManuallyAddTheCode" />{' '}
           <code className={styles.addManuallyPre}>{this.state.base32}</code>
         </p>
         <br />
         <p className={styles.instructionStep}>
-          3. Write the 6 digit code to confirm
+          <Translate tr="settings.twoFactorStep3" />
         </p>
         <Form state={this.state} onChange={changes => this.setState(changes)}>
           <Field fieldName="code" type={SixDigitInput} />
         </Form>
         <br />
-        <Button onClick={this.activate}>Confirm</Button>
+        <Button onClick={this.activate}>
+          <Translate tr="global.confirm" />
+        </Button>
       </div>
     )
   }

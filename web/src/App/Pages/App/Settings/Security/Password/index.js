@@ -8,6 +8,8 @@ import Text from 'orionsoft-parts/lib/components/fields/Text'
 import withMessage from 'orionsoft-parts/lib/decorators/withMessage'
 import PropTypes from 'prop-types'
 import LockIcon from 'react-icons/lib/md/lock'
+import Translate from 'App/i18n'
+import translate from 'App/i18n/translate'
 
 @withMessage
 export default class ChangePassword extends React.Component {
@@ -21,12 +23,12 @@ export default class ChangePassword extends React.Component {
   schema = {
     oldPassword: {
       type: String,
-      label: 'Current password'
+      label: translate('settings.currentPassword')
     },
     newPassword: {
       type: String,
       min: 8,
-      label: 'New password'
+      label: translate('settings.newPassword')
     },
     confirm: {
       type: String,
@@ -40,7 +42,7 @@ export default class ChangePassword extends React.Component {
           return 'passwordsDontMatch'
         }
       },
-      label: 'Confirm the new password'
+      label: translate('settings.confirmTheNewPassword')
     }
   }
 
@@ -53,33 +55,41 @@ export default class ChangePassword extends React.Component {
             ref="form"
             onSuccess={() => this.props.showMessage('Your password was changed')}
             schema={this.schema}>
-            <div className="label">Current password</div>
+            <div className="label">
+              <Translate tr="settings.currentPassword" />
+            </div>
             <Field
               fieldName="oldPassword"
               fieldType="password"
-              placeholder="Current password"
+              placeholder={translate('settings.currentPassword')}
               type={Text}
             />
             <div className={styles.divider} />
-            <div className="label">New password</div>
+            <div className="label">
+              <Translate tr="settings.newPassword" />
+            </div>
             <Field
               fieldName="newPassword"
               fieldType="password"
-              placeholder="New password"
+              placeholder={translate('settings.newPassword')}
               type={Text}
             />
-            <div className="description">Your password must have at least 6 characters</div>
-            <div className="label">Confirm your password</div>
+            <div className="description">
+              <Translate tr="auth.passwordRequirements" />
+            </div>
+            <div className="label">
+              <Translate tr="settings.confirmYourPassword" />
+            </div>
             <Field
               fieldName="confirm"
               fieldType="password"
-              placeholder="Repeat your new password"
+              placeholder={translate('settings.repeatYourNewPassword')}
               type={Text}
             />
           </AutoForm>
           <br />
           <Button icon={LockIcon} onClick={() => this.refs.form.submit()} primary>
-            Change password
+            <Translate tr="settings.changePassword" />
           </Button>
         </Section>
       </div>

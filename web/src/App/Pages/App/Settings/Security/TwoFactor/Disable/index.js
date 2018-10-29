@@ -7,6 +7,7 @@ import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 import autobind from 'autobind-decorator'
 import withMessage from 'orionsoft-parts/lib/decorators/withMessage'
+import Translate from 'App/i18n'
 
 @withMutation(gql`
   mutation disableTwoFactor {
@@ -27,7 +28,7 @@ export default class Disable extends React.Component {
   async disableTwoFactor() {
     try {
       await this.props.disableTwoFactor()
-      this.props.showMessage('Two factor authentication has been disabled correctly')
+      this.props.showMessage(<Translate tr="settings.twoFactorDisabled" />)
     } catch (error) {
       this.props.showMessage(error)
     }
@@ -38,12 +39,14 @@ export default class Disable extends React.Component {
       <div className={styles.container}>
         <HasTwoFactorIcon size={28} className={styles.twoFactorActivatedIcon} />
         <span className={styles.twoFactorActivatedText}>
-          Two factor authentication activated
+          <Translate tr="settings.twoFactorActivated" />
         </span>
-        <div className={styles.yourAccountIsSecure}>Your account is safer</div>
+        <div className={styles.yourAccountIsSecure}>
+          <Translate tr="settings.twoFactorYourAccountIsSafer" />
+        </div>
         <br />
         <Button danger onClick={this.disableTwoFactor}>
-          Disable
+          <Translate tr="global.disable" />
         </Button>
       </div>
     )

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import Disable from './Disable'
 import Enable from './Enable'
 import Section from 'App/components/Section'
+import Translate from 'App/i18n'
 
 @withGraphQL(gql`
   query doIHaveTwoFactor {
@@ -35,8 +36,8 @@ export default class TwoFactor extends React.Component {
       <div className={styles.container}>
         <Section
           top
-          title="Two factor authentication"
-          description="Two-factor authentication (2FA) adds an additional layer of protection beyond passwords">
+          title={<Translate tr="settings.twoFactorAuthentication" />}
+          description={<Translate tr="settings.twoFactorDescription" />}>
           {this.renderDisable()}
           {this.renderEnable()}
         </Section>
