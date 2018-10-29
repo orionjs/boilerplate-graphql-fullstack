@@ -17,5 +17,6 @@ export default {
   notAnEmail: ({label}) => `${label} is not an email`,
   notUnique: ({label}) => `${label} is not unique`,
   notFound: ({label}) => `${label} not found`,
-  invalid: ({label}) => `${label} is not a valid value`
+  invalid: ({label}) => `${label} is not a valid value`,
+  mustStartWithPlus: 'The phone must start with +'
 }

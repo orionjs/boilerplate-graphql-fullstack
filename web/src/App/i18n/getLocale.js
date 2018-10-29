@@ -16,7 +16,7 @@ const getUserLang = function(user) {
 }
 
 const getForcedLang = function() {
-  return 'en'
+  return 'es'
 }
 
 export default function(user) {

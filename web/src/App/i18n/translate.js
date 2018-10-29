@@ -2,7 +2,7 @@ import strings from './strings'
 import _ from 'underscore'
 import getLocale from './getLocale'
 
-const defaultLang = 'en'
+const defaultLang = 'es'
 
 const getString = function(key, lang) {
   const parts = key.split('.')

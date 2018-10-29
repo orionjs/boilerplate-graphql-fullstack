@@ -16,5 +16,6 @@ export default {
   notABoolean: ({label}) => `${label} no es un valor verdadero o falso`,
   notAnEmail: ({label}) => `${label} no es un email`,
   notUnique: ({label}) => `${label} no es único`,
-  notFound: ({label}) => `${label} no se encontró`
+  notFound: ({label}) => `${label} no se encontró`,
+  mustStartWithPlus: 'El teléfono debe empezar con +'
 }

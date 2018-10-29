@@ -9,6 +9,8 @@ import withUserId from 'App/helpers/auth/withUserId'
 import LoggedIn from '../LoggedIn'
 import {Link} from 'react-router-dom'
 import {setSession} from '@orion-js/graphql-client'
+import Translate from 'App/i18n'
+import translate from 'App/i18n/translate'
 
 @withUserId
 export default class Login extends React.Component {
@@ -31,18 +33,27 @@ export default class Login extends React.Component {
         <AutoForm mutation="loginWithPassword" ref="form" onSuccess={this.onSuccess}>
           <div className="label">Email</div>
           <Field fieldName="email" type={Text} fieldType="email" placeholder="Email" />
-          <div className="label">Password</div>
-          <Field fieldName="password" type={Text} fieldType="password" placeholder="Password" />
+          <div className="label">
+            <Translate tr="auth.password" />
+          </div>
+          <Field
+            fieldName="password"
+            type={Text}
+            fieldType="password"
+            placeholder={translate('auth.password')}
+          />
           <div className="description">
-            <Link to="/forgot">Forgot my password</Link>
+            <Link to="/forgot">
+              <Translate tr="auth.forgotMyPassword" />
+            </Link>
           </div>
         </AutoForm>
         <br />
         <Button style={{marginRight: 10}} to="/register">
-          Create an account
+          <Translate tr="auth.createAnAccount" />
         </Button>
         <Button onClick={() => this.refs.form.submit()} primary loading={this.props.loading}>
-          Log in
+          <Translate tr="auth.login" />
         </Button>
       </div>
     )

@@ -7,6 +7,7 @@ import styles from './styles.css'
 import Loading from 'orionsoft-parts/lib/components/Loading'
 import sleep from 'orionsoft-parts/lib/helpers/sleep'
 import {setSession} from '@orion-js/graphql-client'
+import Translate from 'App/i18n'
 
 @withMutation(gql`
   mutation verifyEmail($token: String) {
@@ -43,7 +44,7 @@ export default class VerifyEmail extends React.Component {
       this.props.onLogin()
     } catch (error) {
       if (error.message.includes('Validation Error')) {
-        this.setState({errorMessage: 'The verification code expired'})
+        this.setState({errorMessage: <Translate tr="auth.emailVerficationCodeExpired" />})
       } else {
         this.setState({errorMessage: error.message})
       }
@@ -57,7 +58,9 @@ export default class VerifyEmail extends React.Component {
     return (
       <div className={styles.loading}>
         <Loading size={40} />
-        <p>We are verifying your email</p>
+        <p>
+          <Translate tr="auth.weAreVerifyingYourEmail" />
+        </p>
       </div>
     )
   }

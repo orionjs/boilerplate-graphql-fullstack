@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import withUserId from 'App/helpers/auth/withUserId'
 import LoggedIn from '../LoggedIn'
 import withMessage from 'orionsoft-parts/lib/decorators/withMessage'
+import Translate from 'App/i18n'
 
 @withUserId
 @withMessage
@@ -19,7 +20,7 @@ export default class ForgotPassword extends React.Component {
 
   @autobind
   onSuccess() {
-    this.props.showMessage('Please follow the instructions in your email')
+    this.props.showMessage(<Translate tr="auth.followInstructionsInEmail" />)
   }
 
   render() {
@@ -28,16 +29,11 @@ export default class ForgotPassword extends React.Component {
       <div>
         <AutoForm mutation="forgotPassword" ref="form" onSuccess={this.onSuccess}>
           <div className="label">Email</div>
-          <Field
-            fieldName="email"
-            type={Text}
-            placeholder="The email of your account"
-            fieldType="email"
-          />
+          <Field fieldName="email" type={Text} placeholder="Email" fieldType="email" />
         </AutoForm>
         <br />
         <Button onClick={() => this.refs.form.submit()} primary>
-          Reset Password
+          <Translate tr="auth.resetPassword" />
         </Button>
         <br />
         <br />

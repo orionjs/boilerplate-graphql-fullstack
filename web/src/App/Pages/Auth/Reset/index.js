@@ -9,6 +9,8 @@ import withUserId from 'App/helpers/auth/withUserId'
 import LoggedIn from '../LoggedIn'
 import withMessage from 'orionsoft-parts/lib/decorators/withMessage'
 import {setSession} from '@orion-js/graphql-client'
+import Translate from 'App/i18n'
+import translate from 'App/i18n/translate'
 
 @withUserId
 @withMessage
@@ -46,14 +48,14 @@ export default class ResetPassword extends React.Component {
   @autobind
   async onSuccess(session) {
     await setSession(session)
-    this.props.showMessage('Your password has been changed')
+    this.props.showMessage(<Translate tr="auth.yourPasswordHasBeenChanged" />)
     this.props.onLogin()
   }
 
   @autobind
   onValidationError({token}) {
     if (token === 'tokenNotFound') {
-      this.props.showMessage('The reset link is expired, please start again')
+      this.props.showMessage(<Translate tr="auth.resetLinkExpired" />)
     }
   }
 
@@ -68,15 +70,31 @@ export default class ResetPassword extends React.Component {
           schema={this.schema}
           onSuccess={this.onSuccess}
           onValidationError={this.onValidationError}>
-          <div className="label">New password</div>
-          <Field fieldName="password" fieldType="password" placeholder="New Password" type={Text} />
-          <div className="description">Your password must be at least 8 characters long</div>
-          <div className="label">Confirm password</div>
-          <Field fieldName="confirm" fieldType="password" placeholder="Confirm" type={Text} />
+          <div className="label">
+            <Translate tr="auth.newPassword" />
+          </div>
+          <Field
+            fieldName="password"
+            fieldType="password"
+            placeholder={translate('auth.newPassword')}
+            type={Text}
+          />
+          <div className="description">
+            <Translate tr="auth.passwordRequirements" />
+          </div>
+          <div className="label">
+            <Translate tr="auth.confirmPassword" />
+          </div>
+          <Field
+            fieldName="confirm"
+            fieldType="password"
+            placeholder={translate('auth.confirm')}
+            type={Text}
+          />
         </AutoForm>
         <br />
         <Button onClick={() => this.refs.form.submit()} primary>
-          Reset Password
+          <Translate tr="auth.resetPassword" />
         </Button>
         <br />
         <br />
