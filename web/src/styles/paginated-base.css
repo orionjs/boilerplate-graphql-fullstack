@@ -1,0 +1,146 @@
+.paginated-pagination {
+  display: flex;
+  margin: 20px 10px 10px 10px;
+}
+.paginated-pagination-pages {
+  flex: 1;
+  text-align: right;
+}
+.paginated-pagination-select {
+  position: relative;
+  top: -2px;
+  font-family: inherit;
+  background-color: #eee;
+  outline: none;
+}
+.paginated-pagination-page-input-container {
+  display: inline-block;
+  position: relative;
+  top: -7px;
+}
+.paginated-pagination-page-input {
+  background-color: #eee;
+  border-radius: 5px;
+  height: 30px;
+  width: 40px;
+  font-size: 16px;
+  border: 0;
+  text-align: center;
+  outline: none;
+}
+.paginated-pagination-page-icon {
+  display: inline-block;
+  position: relative;
+  top: -6px;
+  cursor: pointer;
+  color: #000;
+}
+.paginated-pagination-page-icon-disabled {
+  display: inline-block;
+  position: relative;
+  top: -6px;
+  color: #ddd;
+}
+.paginated-error {
+  background-color: #eee;
+  border-radius: 10px;
+  text-align: center;
+}
+.paginated-error-icon {
+  color: #666;
+  margin: 0 auto;
+  padding: 60px 0 10px 0;
+}
+.paginated-error-icon svg {
+  height: 80px;
+  width: 80px;
+}
+.paginated-error-message {
+  color: #666;
+  font-size: 16px;
+  padding: 10px 0 60px 0;
+}
+.paginated-loading {
+  text-align: center;
+}
+.paginated-head-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.paginated-head-left {
+  margin-right: 10px;
+}
+.paginated-head-title {
+  font-size: 30px;
+  font-weight: 700;
+}
+.paginated-head-center {
+  flex: 1;
+  min-height: 48px;
+}
+.paginated-head-right {
+  margin-left: 10px;
+  text-align: right;
+  width: 300px;
+}
+.paginated-head-right > form {
+  width: 100%;
+}
+.paginated-table {
+  padding: 10px;
+  border-radius: 5px;
+}
+.paginated-table th {
+  position: relative;
+}
+.paginated-th-sort {
+  cursor: pointer;
+}
+.paginated-table-row {
+  cursor: pointer;
+}
+.paginated-table-row.selected {
+  background-color: #eee;
+  cursor: pointer;
+}
+.paginated-sort {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.paginated-sort-arrow-up {
+  color: #888;
+  margin: -8px;
+  margin-bottom: 0px;
+}
+.paginated-sort-arrow-up.active {
+  color: #000000;
+}
+.paginated-sort-arrow-down {
+  color: #888;
+  margin: -8px;
+}
+.paginated-sort-arrow-down.active {
+  color: #000000;
+}
+.paginated-text-field {
+  width: 100%;
+}
+.paginated-text-field-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: inherit;
+  border: none;
+  border-radius: 5px;
+  background-color: #eee;
+  padding: 10px;
+  outline: none;
+}
+.paginated-text-field-error {
+  color: #ff3030;
+  margin-top: 10px;
+}

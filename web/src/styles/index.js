@@ -1,5 +1,6 @@
 // Global styles here
 import 'orionsoft-parts/lib/styles.css'
+import './paginated-base.css'
 import './main.css'
 import './flexbox.css'
 import './helpers.css'
