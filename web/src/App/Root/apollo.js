@@ -3,7 +3,7 @@ import url from './url'
 import TwoFactorPromptProvider from './TwoFactorPromptProvider'
 
 // use unique session key per project to avoid
-// loging in and out every time you change it
+// loging in and out every time you change projects
 // in localhost
 const sessionKey = 'orionjs.session'
 
