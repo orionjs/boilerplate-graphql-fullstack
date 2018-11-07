@@ -1,11 +1,13 @@
-// include this file if your app is deployed with Waves static websites
-
 let tries = 0
 
 const checkVersion = async function() {
   const path = '/waves-current-version.json'
   try {
-    const response = await fetch(path)
+    const response = await fetch(path, {
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    })
     const {version} = await response.json()
     saveVersion(version)
   } catch (e) {
