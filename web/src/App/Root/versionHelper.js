@@ -1,13 +1,11 @@
+// include this file if your app is deployed with Waves static websites
+
 let tries = 0
 
 const checkVersion = async function() {
   const path = '/waves-current-version.json'
   try {
-    const response = await fetch(path, {
-      headers: {
-        'Cache-Control': 'no-cache'
-      }
-    })
+    const response = await fetch(path)
     const {version} = await response.json()
     saveVersion(version)
   } catch (e) {
@@ -15,8 +13,12 @@ const checkVersion = async function() {
   }
 }
 
-const loadNewVersion = function(newVersion) {
+const saveNewVersion = function(newVersion) {
   localStorage.setItem('clientVersion', newVersion)
+}
+
+const loadNewVersion = function(newVersion) {
+  saveNewVersion(newVersion)
   window.location.reload(true)
 }
 
@@ -24,8 +26,8 @@ const saveVersion = function(newVersion) {
   const oldVersion = localStorage.getItem('clientVersion')
   if (!Number(newVersion)) return
   if (!oldVersion) {
-    console.log('no old version saved, reloading')
-    loadNewVersion(newVersion)
+    console.log('no old version saved')
+    saveNewVersion(newVersion)
   } else if (Number(oldVersion) !== Number(newVersion)) {
     console.log(`upgrading from version ${oldVersion} to ${newVersion}`)
     if (
@@ -42,3 +44,4 @@ const saveVersion = function(newVersion) {
 
 checkVersion()
 setInterval(checkVersion, 30000)
+
