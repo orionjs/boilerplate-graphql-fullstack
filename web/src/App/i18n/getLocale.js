@@ -1,3 +1,6 @@
+import numeral from 'numeral'
+import moment from 'moment'
+
 const getBrowserLang = function() {
   const full = navigator.language || navigator.userLanguage
   const parts = full.split('-')
@@ -15,10 +18,11 @@ const getUserLang = function(user) {
   return user.profile.language
 }
 
-const getForcedLang = function() {
-  return 'es'
-}
-
 export default function(user) {
-  return getForcedLang() || getUserLang(user) || getSavedLang() || getBrowserLang()
+  const locale = getUserLang(user) || getSavedLang() || getBrowserLang()
+
+  moment.locale(locale)
+  numeral.locale(locale)
+
+  return locale
 }

@@ -1,23 +1,24 @@
 import React from 'react'
 import apolloClient from './apollo'
 import {ApolloProvider} from 'react-apollo'
+// import HooksProvider from 'apollo-hooks/lib/ApolloProvider'
 import OrionsoftProvider from 'orionsoft-parts/lib/components/Provider'
-import './locale'
-import PropTypes from 'prop-types'
 import TwoFactorPromptProvider from './TwoFactorPromptProvider'
+import ErrorHandler from 'App/components/ErrorHandler'
+import LocaleProvider from 'App/i18n/LocaleProvider'
 
-export default class Root extends React.Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-
-  render() {
-    return (
+export default function Root() {
+  return (
+    <LocaleProvider>
       <ApolloProvider client={apolloClient}>
-        <OrionsoftProvider meProvider={false}>
-          <TwoFactorPromptProvider>{this.props.children}</TwoFactorPromptProvider>
-        </OrionsoftProvider>
+        {/* <HooksProvider client={apolloClient}> */}
+        <ErrorHandler>
+          <OrionsoftProvider meProvider={false}>
+            <TwoFactorPromptProvider>{this.props.children}</TwoFactorPromptProvider>
+          </OrionsoftProvider>
+        </ErrorHandler>
+        {/* </HooksProvider> */}
       </ApolloProvider>
-    )
-  }
+    </LocaleProvider>
+  )
 }
