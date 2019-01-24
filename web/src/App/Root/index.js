@@ -7,14 +7,14 @@ import TwoFactorPromptProvider from './TwoFactorPromptProvider'
 import ErrorHandler from 'App/components/ErrorHandler'
 import LocaleProvider from 'App/i18n/LocaleProvider'
 
-export default function Root() {
+export default function Root(props) {
   return (
     <LocaleProvider>
       <ApolloProvider client={apolloClient}>
         {/* <HooksProvider client={apolloClient}> */}
         <ErrorHandler>
           <OrionsoftProvider meProvider={false}>
-            <TwoFactorPromptProvider>{this.props.children}</TwoFactorPromptProvider>
+            <TwoFactorPromptProvider>{props.children}</TwoFactorPromptProvider>
           </OrionsoftProvider>
         </ErrorHandler>
         {/* </HooksProvider> */}
