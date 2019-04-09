@@ -29,7 +29,13 @@ export default class ForgotPassword extends React.Component {
       <div>
         <AutoForm mutation="forgotPassword" ref="form" onSuccess={this.onSuccess}>
           <div className="label">Email</div>
-          <Field fieldName="email" type={Text} placeholder="Email" fieldType="email" />
+          <Field
+            fieldName="email"
+            type={Text}
+            placeholder="Email"
+            fieldType="email"
+            onEnter={() => this.refs.form.submit()}
+          />
         </AutoForm>
         <br />
         <Button onClick={() => this.refs.form.submit()} primary>

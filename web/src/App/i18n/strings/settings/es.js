@@ -3,7 +3,8 @@ export default {
   profileDescription: 'Actualiza tu información personal',
   yourProfileWasSaved: 'Tu perfil fue guardado',
   twoFactorAuthentication: 'Autentificación de dos factores',
-  twoFactorDescription: 'La autentificación de dos factores (2FA) agrega una capa adicional de protección más alla de las contraseñas',
+  twoFactorDescription:
+    'La autentificación de dos factores (2FA) agrega una capa adicional de protección más alla de las contraseñas',
   twoFactorNowYouMustConfirm: 'Ahora debes confirmar el código desde tu app',
   twoFactorEnabled: 'La autentificación de dos factores fue activada',
   enableTwoFactor: 'Activar autentificación de dos factores',
@@ -20,6 +21,6 @@ export default {
   confirmYourPassword: 'Confirma tu contraseña',
   repeatYourNewPassword: 'Repite tu nueva contraseña',
   changePassword: 'Cambiar contraseña',
-  title: 'Ajustes',
-  security: 'Seguridad'
+  changePasswordDescription: 'Cambia tu contraseña',
+  title: 'Ajustes'
 }

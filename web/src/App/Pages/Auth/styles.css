@@ -25,3 +25,11 @@
   background-size: cover;
   background-position: center;
 }
+
+:local(.logo) {
+  text-align: center;
+}
+
+:local(.logo) img {
+  height: 60px;
+}

@@ -37,26 +37,46 @@ export default class Register extends React.Component {
                 <div className="label">
                   <Translate tr="auth.name" />
                 </div>
-                <Field fieldName="firstName" type={Text} placeholder={translate('auth.name')} />
+                <Field
+                  fieldName="firstName"
+                  type={Text}
+                  placeholder={translate('auth.name')}
+                  onEnter={() => this.refs.lastName.focus()}
+                />
               </div>
               <div className="col-xs-12 col-sm-6">
                 <div className="label">
                   <Translate tr="auth.lastName" />
                 </div>
-                <Field fieldName="lastName" type={Text} placeholder={translate('auth.lastName')} />
+                <Field
+                  ref="lastName"
+                  fieldName="lastName"
+                  type={Text}
+                  placeholder={translate('auth.lastName')}
+                  onEnter={() => this.refs.email.focus()}
+                />
               </div>
             </div>
           </Field>
           <div className="label">Email</div>
-          <Field fieldName="email" type={Text} fieldType="email" placeholder="Email" />
+          <Field
+            ref="email"
+            fieldName="email"
+            type={Text}
+            fieldType="email"
+            placeholder="Email"
+            onEnter={() => this.refs.password.focus()}
+          />
           <div className="label">
             <Translate tr="auth.password" />
           </div>
           <Field
+            ref="password"
             fieldName="password"
             type={Text}
             fieldType="password"
             placeholder={translate('auth.password')}
+            onEnter={() => this.refs.form.submit()}
           />
         </AutoForm>
         <br />

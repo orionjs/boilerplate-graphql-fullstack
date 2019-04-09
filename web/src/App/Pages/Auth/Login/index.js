@@ -32,15 +32,23 @@ export default class Login extends React.Component {
       <div>
         <AutoForm mutation="loginWithPassword" ref="form" onSuccess={this.onSuccess}>
           <div className="label">Email</div>
-          <Field fieldName="email" type={Text} fieldType="email" placeholder="Email" />
+          <Field
+            fieldName="email"
+            type={Text}
+            fieldType="email"
+            placeholder="Email"
+            onEnter={() => this.refs.password.focus()}
+          />
           <div className="label">
             <Translate tr="auth.password" />
           </div>
           <Field
+            ref="password"
             fieldName="password"
             type={Text}
             fieldType="password"
             placeholder={translate('auth.password')}
+            onEnter={() => this.refs.form.submit()}
           />
           <div className="description">
             <Link to="/forgot">

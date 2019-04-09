@@ -17,5 +17,12 @@ export default {
   notAnEmail: ({label}) => `${label} no es un email`,
   notUnique: ({label}) => `${label} no es único`,
   notFound: ({label}) => `${label} no se encontró`,
-  mustStartWithPlus: 'El teléfono debe empezar con +'
+  mustStartWithPlus: 'El teléfono debe empezar con +',
+  emailExists: 'Al parecer ya estas registrado',
+  invalid: 'No es válido',
+  incorrectPassword: 'Contraseña incorrecta',
+  noPassword:
+    'Tu cuenta no tiene contraseña, por favor anda a "olvidé mi contraseña" para crear una',
+  userNotFound: 'No existe una cuenta con este email',
+  invalidPhoneLength: 'El número de dígitos del teléfono es incorrecto'
 }

@@ -1,16 +1,29 @@
+import url from './url'
+import getEnv from './getEnv'
 // include this file if your app is deployed with Waves static websites
 
-let tries = 0
+let pendingVersionUpdate = null
+
+setInterval(() => {
+  if (!pendingVersionUpdate) return
+  try {
+    if (!document.hasFocus()) {
+      console.log('waiting focus to refresh')
+      return
+    }
+  } catch (error) {}
+  console.log('updating to new version', pendingVersionUpdate)
+  saveNewVersion(pendingVersionUpdate)
+  window.location.reload(true)
+}, 2000)
 
 const checkVersion = async function() {
-  const path = '/waves-current-version.json'
+  const path = url + '/waves-current-version.json'
   try {
     const response = await fetch(path)
     const {version} = await response.json()
     saveVersion(version)
-  } catch (e) {
-    // saveVersion(3)
-  }
+  } catch (e) {}
 }
 
 const saveNewVersion = function(newVersion) {
@@ -18,8 +31,7 @@ const saveNewVersion = function(newVersion) {
 }
 
 const loadNewVersion = function(newVersion) {
-  saveNewVersion(newVersion)
-  window.location.reload(true)
+  pendingVersionUpdate = newVersion
 }
 
 const saveVersion = function(newVersion) {
@@ -30,18 +42,11 @@ const saveVersion = function(newVersion) {
     saveNewVersion(newVersion)
   } else if (Number(oldVersion) !== Number(newVersion)) {
     console.log(`upgrading from version ${oldVersion} to ${newVersion}`)
-    if (
-      tries === 0 ||
-      global.confirm('A new version of this app is available. Do you want to update now?')
-    ) {
-      loadNewVersion(newVersion)
-    } else {
-      clearInterval(checkVersion)
-    }
+    loadNewVersion(newVersion)
   }
-  tries++
 }
 
-checkVersion()
-setInterval(checkVersion, 30000)
-
+if (getEnv() === 'prod') {
+  checkVersion()
+  setInterval(checkVersion, 30000)
+}

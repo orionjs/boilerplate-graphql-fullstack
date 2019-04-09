@@ -78,6 +78,7 @@ export default class ResetPassword extends React.Component {
             fieldType="password"
             placeholder={translate('auth.newPassword')}
             type={Text}
+            onEnter={() => this.refs.confirm.focus()}
           />
           <div className="description">
             <Translate tr="auth.passwordRequirements" />
@@ -86,10 +87,12 @@ export default class ResetPassword extends React.Component {
             <Translate tr="auth.confirmPassword" />
           </div>
           <Field
+            ref="confirm"
             fieldName="confirm"
             fieldType="password"
             placeholder={translate('auth.confirm')}
             type={Text}
+            onEnter={() => this.refs.form.submit()}
           />
         </AutoForm>
         <br />

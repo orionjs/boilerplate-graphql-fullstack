@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './styles.css'
-import Logo from './Logo'
 import autobind from 'autobind-decorator'
 import PropTypes from 'prop-types'
 import Login from './Login'
@@ -36,7 +35,7 @@ export default class Auth extends React.Component {
   renderLogo() {
     return (
       <div className={styles.logo}>
-        <Logo color="black" isLoading={this.state.isLoading} />
+        <img src="https://orionjs.com/img/logo-black.svg" alt="Logo" />
       </div>
     )
   }

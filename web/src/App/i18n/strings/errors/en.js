@@ -18,5 +18,11 @@ export default {
   notUnique: ({label}) => `${label} is not unique`,
   notFound: ({label}) => `${label} not found`,
   invalid: ({label}) => `${label} is not a valid value`,
-  mustStartWithPlus: 'The phone must start with +'
+  mustStartWithPlus: 'The phone must start with +',
+  emailExists: 'You already have an account',
+  incorrectPassword: 'Incorrect password',
+  noPassword:
+    'Your account doesn\'t have a password, please go to "forgot password" to create a new one',
+  userNotFound: 'You do not have an account here',
+  invalidPhoneLength: 'The length of the phone number is incorrect'
 }
