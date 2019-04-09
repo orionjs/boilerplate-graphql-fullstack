@@ -19,7 +19,7 @@
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
     "orionjs-react-autoform": "^1.2.1",
-    "orionsoft-parts": "^1.15.16",
+    "orionsoft-parts": "^1.15.17",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-addons-css-transition-group": "^15.6.2",

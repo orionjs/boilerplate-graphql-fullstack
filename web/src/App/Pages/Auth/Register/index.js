@@ -76,11 +76,11 @@ export default class Register extends React.Component {
             type={Text}
             fieldType="password"
             placeholder={translate('auth.password')}
-            onEnter={() => this.refs.form.submit()}
+            onEnter={() => this.refs.submit.click()}
           />
         </AutoForm>
         <br />
-        <Button onClick={() => this.refs.form.submit()} primary>
+        <Button ref="submit" onClick={() => this.refs.form.submit()} primary>
           <Translate tr="auth.createAccount" />
         </Button>
         <br />

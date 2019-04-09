@@ -48,7 +48,7 @@ export default class Login extends React.Component {
             type={Text}
             fieldType="password"
             placeholder={translate('auth.password')}
-            onEnter={() => this.refs.form.submit()}
+            onEnter={() => this.refs.submit.click()}
           />
           <div className="description">
             <Link to="/forgot">
@@ -60,7 +60,11 @@ export default class Login extends React.Component {
         <Button style={{marginRight: 10}} to="/register">
           <Translate tr="auth.createAnAccount" />
         </Button>
-        <Button onClick={() => this.refs.form.submit()} primary loading={this.props.loading}>
+        <Button
+          ref="submit"
+          onClick={() => this.refs.form.submit()}
+          primary
+          loading={this.props.loading}>
           <Translate tr="auth.login" />
         </Button>
       </div>

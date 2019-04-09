@@ -34,11 +34,11 @@ export default class ForgotPassword extends React.Component {
             type={Text}
             placeholder="Email"
             fieldType="email"
-            onEnter={() => this.refs.form.submit()}
+            onEnter={() => this.refs.submit.click()}
           />
         </AutoForm>
         <br />
-        <Button onClick={() => this.refs.form.submit()} primary>
+        <Button ref="submit" onClick={() => this.refs.form.submit()} primary>
           <Translate tr="auth.resetPassword" />
         </Button>
         <br />

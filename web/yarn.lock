@@ -8213,10 +8213,10 @@ orionjs-react-autoform@^1.2.1:
     lodash "^4.17.11"
     prop-types "^15.7.2"
 
-orionsoft-parts@^1.15.16:
-  version "1.15.16"
-  resolved "https://registry.yarnpkg.com/orionsoft-parts/-/orionsoft-parts-1.15.16.tgz#f1ce21f5475b7093d4744ce27a5713e9ecba8112"
-  integrity sha512-/BoATWgxLODgrD7fmS0N55GtAi7rI11tep3xHY/piyzqZ6e0VK0BwPhEo+UR7xtq467/K7fl7gB7rmbOanA7oQ==
+orionsoft-parts@^1.15.17:
+  version "1.15.17"
+  resolved "https://registry.yarnpkg.com/orionsoft-parts/-/orionsoft-parts-1.15.17.tgz#e4832f92c692432d69c8b28e97a1e9be2e93febd"
+  integrity sha512-pRd083Xyvt8pNaeVwmOigkT2f5Popib5Ly6tpXnhR8NrBP/U0VEmGs3p8JyowMJz15J6sAnKRjCSe02wuPmgYg==
   dependencies:
     autobind-decorator "^2.1.0"
     boron "^0.2.3"
