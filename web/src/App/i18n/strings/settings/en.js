@@ -22,5 +22,6 @@ export default {
   repeatYourNewPassword: 'Repeat your new password',
   changePassword: 'Change password',
   changePasswordDescription: 'Change your password',
-  title: 'Settings'
+  title: 'Settings',
+  security: 'Security'
 }
