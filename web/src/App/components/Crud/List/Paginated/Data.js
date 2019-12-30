@@ -29,9 +29,14 @@ export default class Data extends React.Component {
     if (isEmpty(state)) {
       return {props}
     }
+
     if (!props.data.data) {
-      return
+      return {props}
     }
+    if (!state.props.data.data) {
+      return {props}
+    }
+
     if (
       JSON.stringify(props.data.data.result) !== JSON.stringify(state.props.data.data.result) ||
       JSON.stringify(props.data.variables) !== JSON.stringify(state.props.data.variables)
@@ -61,7 +66,9 @@ export default class Data extends React.Component {
   }
 
   renderTable() {
-    if (this.props.debouncing) return this.renderLoading()
+    if (this.props.loading) {
+      return this.renderLoading()
+    }
     if (this.props.data.loading) {
       this.props.data.refetch()
       return this.renderLoading()
@@ -70,7 +77,7 @@ export default class Data extends React.Component {
       return this.renderNotFound()
     }
     return (
-      <div ref="items" className="paginated-table-items">
+      <div className="paginated-table-items">
         <Table
           sortBy={this.props.sortBy}
           sortType={this.props.sortType}
@@ -89,16 +96,13 @@ export default class Data extends React.Component {
     if (!this.state || isEmpty(this.state)) return null
     if (this.state.props.data.error) {
       return this.renderError()
-    } else if (!this.state.props.data.data.result) {
-      if (
-        (this.state.props.data.networkStatus === 1 &&
-          Object.keys(this.state.props.data).length === 10) ||
-        this.state.props.data.networkStatus === 2
-      ) {
+    } else if (!this.state.props.data.data || !this.state.props.data.data.result) {
+      if (this.props.loading) {
         return this.renderLoading()
       }
-      return ''
+      return null
     }
+
     return (
       <div className="paginated-container box">
         {this.renderTable()}
