@@ -3,7 +3,8 @@ import {startGraphQL} from '@orion-js/graphql'
 import resolvers from 'app/resolvers'
 
 startGraphQL({
-  resolvers
+  resolvers,
+  useGraphiql: true
 })
 
 setCorsOptions({
