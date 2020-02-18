@@ -1,8 +1,13 @@
-import url from './url'
 import getEnv from './getEnv'
 // include this file if your app is deployed with Waves static websites
 
 let pendingVersionUpdate = null
+
+const updateNow = function() {
+  console.log('updating to new version', pendingVersionUpdate)
+  saveNewVersion(pendingVersionUpdate)
+  window.location.reload(true)
+}
 
 setInterval(() => {
   if (!pendingVersionUpdate) return
@@ -12,17 +17,15 @@ setInterval(() => {
       return
     }
   } catch (error) {}
-  console.log('updating to new version', pendingVersionUpdate)
-  saveNewVersion(pendingVersionUpdate)
-  window.location.reload(true)
+  updateNow()
 }, 2000)
 
-const checkVersion = async function() {
-  const path = url + '/waves-current-version.json'
+const checkVersion = async function(isFirst) {
+  const path = '/waves-current-version.json'
   try {
     const response = await fetch(path)
     const {version} = await response.json()
-    saveVersion(version)
+    saveVersion(version, isFirst)
   } catch (e) {}
 }
 
@@ -30,11 +33,14 @@ const saveNewVersion = function(newVersion) {
   localStorage.setItem('clientVersion', newVersion)
 }
 
-const loadNewVersion = function(newVersion) {
+const loadNewVersion = function(newVersion, isFirst) {
   pendingVersionUpdate = newVersion
+  if (isFirst) {
+    updateNow()
+  }
 }
 
-const saveVersion = function(newVersion) {
+const saveVersion = function(newVersion, isFirst) {
   const oldVersion = localStorage.getItem('clientVersion')
   if (!Number(newVersion)) return
   if (!oldVersion) {
@@ -42,11 +48,11 @@ const saveVersion = function(newVersion) {
     saveNewVersion(newVersion)
   } else if (Number(oldVersion) !== Number(newVersion)) {
     console.log(`upgrading from version ${oldVersion} to ${newVersion}`)
-    loadNewVersion(newVersion)
+    loadNewVersion(newVersion, isFirst)
   }
 }
 
 if (getEnv() === 'prod') {
-  checkVersion()
+  checkVersion(true)
   setInterval(checkVersion, 30000)
 }
