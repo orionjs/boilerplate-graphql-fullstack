@@ -18,3 +18,4 @@ yarn-error.log
 # Deploy
 deploy.sh
 deploy-beta.sh
+.idea
