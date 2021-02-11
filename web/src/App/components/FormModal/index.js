@@ -13,6 +13,7 @@ export default class FormModal extends React.Component {
     title: PropTypes.node,
     confirmText: PropTypes.node,
     mutation: PropTypes.string,
+    children: PropTypes.node,
     doc: PropTypes.object,
     only: PropTypes.any,
     omit: PropTypes.any,
@@ -42,6 +43,7 @@ export default class FormModal extends React.Component {
         only={this.props.only}
         omit={this.props.omit}
         onSuccess={this.props.onSuccess}
+        children={this.props.children}
       />
     )
   }
