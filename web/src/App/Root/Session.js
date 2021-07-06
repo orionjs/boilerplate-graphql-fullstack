@@ -16,6 +16,7 @@ export default function(props) {
         apollo.resetStoreCallbacks.splice(index, 1)
       }
     }
+    // eslint-disable-next-line
   }, [])
 
   const session = getSession() || {}

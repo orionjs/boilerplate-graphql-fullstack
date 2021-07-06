@@ -20,6 +20,15 @@ export default class Register extends React.Component {
     userId: PropTypes.string
   }
 
+  constructor(props) {
+    super(props)
+    this.form = React.createRef()
+    this.submit = React.createRef()
+    this.lastName = React.createRef()
+    this.email = React.createRef()
+    this.password = React.createRef()
+  }
+
   @autobind
   async onSuccess(session) {
     await setSession(session)
@@ -30,7 +39,7 @@ export default class Register extends React.Component {
     if (this.props.userId) return <LoggedIn />
     return (
       <div>
-        <AutoForm mutation="createUser" ref="form" onSuccess={this.onSuccess}>
+        <AutoForm mutation="createUser" ref={this.form} onSuccess={this.onSuccess}>
           <Field fieldName="profile" type={ObjectField} style={null}>
             <div className="row">
               <div className="col-xs-12 col-sm-6">
@@ -41,7 +50,7 @@ export default class Register extends React.Component {
                   fieldName="firstName"
                   type={Text}
                   placeholder={translate('auth.name')}
-                  onEnter={() => this.refs.lastName.focus()}
+                  onEnter={() => this.lastName.focus()}
                 />
               </div>
               <div className="col-xs-12 col-sm-6">
@@ -49,38 +58,38 @@ export default class Register extends React.Component {
                   <Translate tr="auth.lastName" />
                 </div>
                 <Field
-                  ref="lastName"
+                  ref={this.lastName}
                   fieldName="lastName"
                   type={Text}
                   placeholder={translate('auth.lastName')}
-                  onEnter={() => this.refs.email.focus()}
+                  onEnter={() => this.email.focus()}
                 />
               </div>
             </div>
           </Field>
           <div className="label">Email</div>
           <Field
-            ref="email"
+            ref={this.email}
             fieldName="email"
             type={Text}
             fieldType="email"
             placeholder="Email"
-            onEnter={() => this.refs.password.focus()}
+            onEnter={() => this.password.focus()}
           />
           <div className="label">
             <Translate tr="auth.password" />
           </div>
           <Field
-            ref="password"
+            ref={this.password}
             fieldName="password"
             type={Text}
             fieldType="password"
             placeholder={translate('auth.password')}
-            onEnter={() => this.refs.submit.click()}
+            onEnter={() => this.submit.click()}
           />
         </AutoForm>
         <br />
-        <Button ref="submit" onClick={() => this.refs.form.submit()} primary>
+        <Button ref={this.submit} onClick={() => this.form.submit()} primary>
           <Translate tr="auth.createAccount" />
         </Button>
         <br />

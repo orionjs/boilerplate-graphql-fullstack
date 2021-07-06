@@ -37,6 +37,11 @@ export default class Profile extends React.Component {
 
   state = {}
 
+  constructor(props) {
+    super(props)
+    this.form = React.createRef()
+  }
+
   render() {
     if (!this.props.me) return
     return (
@@ -47,7 +52,7 @@ export default class Profile extends React.Component {
           description={<Translate tr="settings.profileDescription" />}>
           <AutoForm
             mutation="setUserProfile"
-            ref="form"
+            ref={this.form}
             doc={{userId: this.props.me._id, profile: this.props.me.profile}}
             onSuccess={() =>
               this.props.showMessage(<Translate tr="settings.yourProfileWasSaved" />)
@@ -56,7 +61,7 @@ export default class Profile extends React.Component {
             omit={['userId']}
           />
           <br />
-          <Button onClick={() => this.refs.form.submit()} primary>
+          <Button onClick={() => this.form.submit()} primary>
             <Translate tr="global.save" />
           </Button>
         </Section>
