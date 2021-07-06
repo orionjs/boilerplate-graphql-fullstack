@@ -23,12 +23,21 @@ export default class SixDigitInput extends React.Component {
     }
   }
 
+  constructor(props) {
+    super(props)
+    this.inputsQty = 6
+    this.inputsRefs = {}
+    range(this.inputsQty).forEach(index => {
+      this.inputsRefs[`input_${index}`] = React.createRef()
+    })
+  }
+
   @autobind
   focus() {
     if (this.props.value) {
       this.props.onChange('')
     }
-    this.refs[`input_0`].focus()
+    this.inputsRefs[`input_0`].focus()
   }
 
   getNextIndex(value) {
@@ -41,7 +50,7 @@ export default class SixDigitInput extends React.Component {
   focusNext() {
     const value = this.props.value
     const index = this.getNextIndex(value)
-    this.refs[`input_${index}`].focus()
+    this.inputsRefs[`input_${index}`].focus()
   }
 
   isReady() {
@@ -61,7 +70,7 @@ export default class SixDigitInput extends React.Component {
     }
     setTimeout(() => {
       if (this.isReady()) {
-        this.refs[`input_${index}`].blur()
+        this.inputsRefs[`input_${index}`].blur()
         setTimeout(() => this.props.onReady(newValue), 200)
       } else {
         this.focusNext()
@@ -78,13 +87,13 @@ export default class SixDigitInput extends React.Component {
   }
 
   renderInputs() {
-    return range(6).map(index => {
+    return range(this.inputsQty).map(index => {
       const value = (this.props.value || '')[index] || ''
       return (
         <input
           key={index}
           value={value}
-          ref={`input_${index}`}
+          ref={this.inputsRefs[`input_${index}`]}
           className={styles.input}
           placeholder="•"
           onChange={event => this.onChange(event, index)}

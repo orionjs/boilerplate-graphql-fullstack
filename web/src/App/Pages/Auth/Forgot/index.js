@@ -18,6 +18,12 @@ export default class ForgotPassword extends React.Component {
     userId: PropTypes.string
   }
 
+  constructor(props) {
+    super(props)
+    this.form = React.createRef()
+    this.submit = React.createRef()
+  }
+
   @autobind
   onSuccess() {
     this.props.showMessage(<Translate tr="auth.followInstructionsInEmail" />)
@@ -27,18 +33,18 @@ export default class ForgotPassword extends React.Component {
     if (this.props.userId) return <LoggedIn />
     return (
       <div>
-        <AutoForm mutation="forgotPassword" ref="form" onSuccess={this.onSuccess}>
+        <AutoForm mutation="forgotPassword" ref={this.form} onSuccess={this.onSuccess}>
           <div className="label">Email</div>
           <Field
             fieldName="email"
             type={Text}
             placeholder="Email"
             fieldType="email"
-            onEnter={() => this.refs.submit.click()}
+            onEnter={() => this.submit.click()}
           />
         </AutoForm>
         <br />
-        <Button ref="submit" onClick={() => this.refs.form.submit()} primary>
+        <Button ref={this.submit} onClick={() => this.form.submit()} primary>
           <Translate tr="auth.resetPassword" />
         </Button>
         <br />

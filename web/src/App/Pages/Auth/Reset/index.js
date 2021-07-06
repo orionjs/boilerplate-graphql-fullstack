@@ -29,12 +29,7 @@ export default class ResetPassword extends React.Component {
     },
     confirm: {
       type: String,
-      custom(
-        confirm,
-        {
-          doc: {password}
-        }
-      ) {
+      custom(confirm, {doc: {password}}) {
         if (confirm !== password) {
           return 'passwordsDontMatch'
         }
@@ -43,6 +38,13 @@ export default class ResetPassword extends React.Component {
     token: {
       type: String
     }
+  }
+
+  constructor(props) {
+    super(props)
+    this.form = React.createRef()
+    this.submit = React.createRef()
+    this.confirm = React.createRef()
   }
 
   @autobind
@@ -66,7 +68,7 @@ export default class ResetPassword extends React.Component {
         <AutoForm
           doc={{token: this.props.token}}
           mutation="resetPassword"
-          ref="form"
+          ref={this.form}
           schema={this.schema}
           onSuccess={this.onSuccess}
           onValidationError={this.onValidationError}>
@@ -78,7 +80,7 @@ export default class ResetPassword extends React.Component {
             fieldType="password"
             placeholder={translate('auth.newPassword')}
             type={Text}
-            onEnter={() => this.refs.confirm.focus()}
+            onEnter={() => this.confirm.focus()}
           />
           <div className="description">
             <Translate tr="auth.passwordRequirements" />
@@ -87,16 +89,16 @@ export default class ResetPassword extends React.Component {
             <Translate tr="auth.confirmPassword" />
           </div>
           <Field
-            ref="confirm"
+            ref={this.confirm}
             fieldName="confirm"
             fieldType="password"
             placeholder={translate('auth.confirm')}
             type={Text}
-            onEnter={() => this.refs.submit.click()}
+            onEnter={() => this.submit.click()}
           />
         </AutoForm>
         <br />
-        <Button ref="submit" onClick={() => this.refs.form.submit()} primary>
+        <Button ref={this.submit} onClick={() => this.form.submit()} primary>
           <Translate tr="auth.resetPassword" />
         </Button>
         <br />

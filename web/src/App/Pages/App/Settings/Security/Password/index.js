@@ -32,18 +32,18 @@ export default class ChangePassword extends React.Component {
     },
     confirm: {
       type: String,
-      custom(
-        confirm,
-        {
-          doc: {newPassword}
-        }
-      ) {
+      custom(confirm, {doc: {newPassword}}) {
         if (confirm !== newPassword) {
           return 'passwordsDontMatch'
         }
       },
       label: translate('settings.confirmTheNewPassword')
     }
+  }
+
+  constructor(props) {
+    super(props)
+    this.form = React.createRef()
   }
 
   render() {
@@ -54,7 +54,7 @@ export default class ChangePassword extends React.Component {
           description={<Translate tr="settings.changePasswordDescription" />}>
           <AutoForm
             mutation="changePassword"
-            ref="form"
+            ref={this.form}
             onSuccess={() => this.props.showMessage('Your password was changed')}
             schema={this.schema}>
             <div className="label">
@@ -90,7 +90,7 @@ export default class ChangePassword extends React.Component {
             />
           </AutoForm>
           <br />
-          <Button icon={LockIcon} onClick={() => this.refs.form.submit()} primary>
+          <Button icon={LockIcon} onClick={() => this.form.submit()} primary>
             <Translate tr="settings.changePassword" />
           </Button>
         </Section>

@@ -1,10 +1,14 @@
 {
   "plugins": [
-    ["module-resolver", {
-      "root": ["./"],
-      "alias": {
-        "App": "./src/App"
+    "styled-jsx/babel",
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "App": "./src/App"
+        }
       }
-    }]
+    ]
   ]
 }

@@ -20,6 +20,13 @@ export default class Login extends React.Component {
     loading: PropTypes.bool
   }
 
+  constructor(props) {
+    super(props)
+    this.form = React.createRef()
+    this.submit = React.createRef()
+    this.password = React.createRef()
+  }
+
   @autobind
   async onSuccess(session) {
     await setSession(session)
@@ -30,25 +37,25 @@ export default class Login extends React.Component {
     if (!this.props.loading && this.props.userId) return <LoggedIn />
     return (
       <div>
-        <AutoForm mutation="loginWithPassword" ref="form" onSuccess={this.onSuccess}>
+        <AutoForm mutation="loginWithPassword" ref={this.form} onSuccess={this.onSuccess}>
           <div className="label">Email</div>
           <Field
             fieldName="email"
             type={Text}
             fieldType="email"
             placeholder="Email"
-            onEnter={() => this.refs.password.focus()}
+            onEnter={() => this.password.focus()}
           />
           <div className="label">
             <Translate tr="auth.password" />
           </div>
           <Field
-            ref="password"
+            ref={this.password}
             fieldName="password"
             type={Text}
             fieldType="password"
             placeholder={translate('auth.password')}
-            onEnter={() => this.refs.submit.click()}
+            onEnter={() => this.submit.click()}
           />
           <div className="description">
             <Link to="/forgot">
@@ -61,8 +68,8 @@ export default class Login extends React.Component {
           <Translate tr="auth.createAnAccount" />
         </Button>
         <Button
-          ref="submit"
-          onClick={() => this.refs.form.submit()}
+          ref={this.submit}
+          onClick={() => this.form.submit()}
           primary
           loading={this.props.loading}>
           <Translate tr="auth.login" />
