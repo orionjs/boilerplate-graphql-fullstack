@@ -1,7 +1,13 @@
 {
-  "presets": ["env"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {"node": 14}
+      }
+    ]
+  ],
   "plugins": [
-    ["transform-object-rest-spread", {"useBuiltIns": true}],
     [
       "module-resolver",
       {
