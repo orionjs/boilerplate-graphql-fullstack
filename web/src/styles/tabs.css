@@ -14,3 +14,10 @@
 .os-tabs-item {
   font-weight: bold;
 }
+
+@supports (padding: max(0px)) {
+  .os-tabs-inner {
+    padding-left: calc(20px + env(safe-area-inset-left));
+    padding-right: calc(20px + env(safe-area-inset-right));
+  }
+}

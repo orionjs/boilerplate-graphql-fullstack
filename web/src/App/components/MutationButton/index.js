@@ -4,14 +4,16 @@ import PropTypes from 'prop-types'
 import styles from './styles.css'
 import Button from 'orionsoft-parts/lib/components/Button'
 import autobind from 'autobind-decorator'
-import WithParams from 'App/components/AutoForm/WithParams'
-import WithMutation from 'App/components/AutoForm/WithMutation'
-import getFragment from 'App/components/AutoForm/getFragment'
+import WithParams from 'orionjs-react-autoform/lib/WithParams'
+import WithMutation from 'orionjs-react-autoform/lib/WithMutation'
+import getFragment from 'orionjs-react-autoform/lib/getFragment'
+import isEqual from 'lodash/isEqual'
 
 @withModal
 export default class FormModal extends React.Component {
   static propTypes = {
     showModal: PropTypes.func,
+    updateModal: PropTypes.func,
     label: PropTypes.node,
     message: PropTypes.node,
     title: PropTypes.node,
@@ -25,7 +27,8 @@ export default class FormModal extends React.Component {
     danger: PropTypes.bool,
     fragment: PropTypes.any,
     disabled: PropTypes.bool,
-    renderChildren: PropTypes.func
+    renderChildren: PropTypes.func,
+    children: PropTypes.node
   }
 
   static defaultProps = {
@@ -56,15 +59,30 @@ export default class FormModal extends React.Component {
   @autobind
   async open(mutate) {
     this.mutate = mutate
-    const {renderChildren} = this.props
+    const {renderChildren, children} = this.props
 
     await this.props.showModal({
       title: this.props.title,
       confirm: this.submit,
       confirmText: this.props.confirmText,
+      children,
       render: renderChildren || this.renderContent,
-      cancelText: 'Cancelar'
+      cancelText: 'Cancel'
     })
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    if (
+      !isEqual(prevProps.children, this.props.children) ||
+      !isEqual(prevProps.title, this.props.title) ||
+      !isEqual(prevProps.message, this.props.message)
+    ) {
+      await this.props.updateModal({
+        title: this.props.title,
+        confirmText: this.props.confirmText,
+        children: this.props.children
+      })
+    }
   }
 
   getFragment({name, result, basicResultQuery, params}) {
@@ -77,6 +95,7 @@ export default class FormModal extends React.Component {
 
   @autobind
   renderContent() {
+    if (this.props.children) return this.props.children
     return (
       <div>
         <div className={styles.message}>{this.props.message}</div>
@@ -87,7 +106,7 @@ export default class FormModal extends React.Component {
 
   renderButton() {
     return (
-      <WithParams name={this.props.mutation}>
+      <WithParams name={this.props.mutation} loading={'Loading...'}>
         {({name, result, basicResultQuery, params}) => (
           <WithMutation
             params={params}

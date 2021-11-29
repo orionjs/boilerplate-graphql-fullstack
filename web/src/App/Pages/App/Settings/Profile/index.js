@@ -7,6 +7,7 @@ import withMessage from 'orionsoft-parts/lib/decorators/withMessage'
 import PropTypes from 'prop-types'
 import withGraphQL from 'react-apollo-decorators/lib/withGraphQL'
 import gql from 'graphql-tag'
+import Translate from 'App/i18n'
 
 const fragment = gql`
   fragment setUserProfileFragment on User {
@@ -40,18 +41,23 @@ export default class Profile extends React.Component {
     if (!this.props.me) return
     return (
       <div className={styles.container}>
-        <Section top title="Perfil" description="Edita tus datos personales">
+        <Section
+          top
+          title={<Translate tr="settings.profile" />}
+          description={<Translate tr="settings.profileDescription" />}>
           <AutoForm
             mutation="setUserProfile"
             ref="form"
             doc={{userId: this.props.me._id, profile: this.props.me.profile}}
-            onSuccess={() => this.props.showMessage('Tu perfil fue guardado')}
+            onSuccess={() =>
+              this.props.showMessage(<Translate tr="settings.yourProfileWasSaved" />)
+            }
             fragment={fragment}
             omit={['userId']}
           />
           <br />
           <Button onClick={() => this.refs.form.submit()} primary>
-            Guardar
+            <Translate tr="global.save" />
           </Button>
         </Section>
       </div>

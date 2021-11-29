@@ -9,7 +9,9 @@ import PropTypes from 'prop-types'
 import withUserId from 'App/helpers/auth/withUserId'
 import LoggedIn from '../LoggedIn'
 import {Link} from 'react-router-dom'
-import setSession from 'App/helpers/auth/setSession'
+import {setSession} from '@orion-js/graphql-client'
+import Translate from 'App/i18n'
+import translate from 'App/i18n/translate'
 
 @withUserId
 export default class Register extends React.Component {
@@ -19,8 +21,8 @@ export default class Register extends React.Component {
   }
 
   @autobind
-  onSuccess(session) {
-    setSession(session)
+  async onSuccess(session) {
+    await setSession(session)
     this.props.onLogin()
   }
 
@@ -32,28 +34,62 @@ export default class Register extends React.Component {
           <Field fieldName="profile" type={ObjectField} style={null}>
             <div className="row">
               <div className="col-xs-12 col-sm-6">
-                <div className="label">Nombre</div>
-                <Field fieldName="firstName" type={Text} placeholder="Nombre" />
+                <div className="label">
+                  <Translate tr="auth.name" />
+                </div>
+                <Field
+                  fieldName="firstName"
+                  type={Text}
+                  placeholder={translate('auth.name')}
+                  onEnter={() => this.refs.lastName.focus()}
+                />
               </div>
               <div className="col-xs-12 col-sm-6">
-                <div className="label">Apellido</div>
-                <Field fieldName="lastName" type={Text} placeholder="Apellido" />
+                <div className="label">
+                  <Translate tr="auth.lastName" />
+                </div>
+                <Field
+                  ref="lastName"
+                  fieldName="lastName"
+                  type={Text}
+                  placeholder={translate('auth.lastName')}
+                  onEnter={() => this.refs.email.focus()}
+                />
               </div>
             </div>
           </Field>
           <div className="label">Email</div>
-          <Field fieldName="email" type={Text} fieldType="email" placeholder="Email" />
-          <div className="label">Contraseña</div>
-          <Field fieldName="password" type={Text} fieldType="password" placeholder="Contraseña" />
+          <Field
+            ref="email"
+            fieldName="email"
+            type={Text}
+            fieldType="email"
+            placeholder="Email"
+            onEnter={() => this.refs.password.focus()}
+          />
+          <div className="label">
+            <Translate tr="auth.password" />
+          </div>
+          <Field
+            ref="password"
+            fieldName="password"
+            type={Text}
+            fieldType="password"
+            placeholder={translate('auth.password')}
+            onEnter={() => this.refs.submit.click()}
+          />
         </AutoForm>
         <br />
-        <Button onClick={() => this.refs.form.submit()} primary>
-          Registrarme
+        <Button ref="submit" onClick={() => this.refs.form.submit()} primary>
+          <Translate tr="auth.createAccount" />
         </Button>
         <br />
         <br />
         <div>
-          Si ya tienes una cuenta <Link to="/login">Entra</Link>
+          <Translate tr="auth.ifYouHaveAnAccount" />{' '}
+          <Link to="/login">
+            <Translate tr="auth.login" />
+          </Link>
         </div>
       </div>
     )
