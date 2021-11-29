@@ -1,6 +1,6 @@
-import {Model} from '@orion-js/app'
+import {createModel} from '@orion-js/models'
 
-export default new Model({
+export default createModel({
   name: 'UserEmail',
   schema: {
     address: {
