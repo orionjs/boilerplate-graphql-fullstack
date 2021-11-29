@@ -1,4 +1,3 @@
-import {setCorsOptions} from '@orion-js/app'
 import {startGraphQL} from '@orion-js/graphql'
 import resolvers from 'app/resolvers'
 
@@ -6,6 +5,23 @@ startGraphQL({
   resolvers
 })
 
-setCorsOptions({
-  origin: '*'
-})
+const DEFAULT_ALLOW_METHODS = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+
+const DEFAULT_ALLOW_HEADERS = [
+  'X-Requested-With',
+  'Access-Control-Allow-Origin',
+  'X-HTTP-Method-Override',
+  'Content-Type',
+  'Authorization',
+  'Accept'
+]
+
+const DEFAULT_MAX_AGE_SECONDS = 60 * 60 * 24 // 24 hours
+
+global.corsOptions = {
+  maxAge: DEFAULT_MAX_AGE_SECONDS,
+  origin: '*',
+  allowHeaders: DEFAULT_ALLOW_HEADERS,
+  exposeHeaders: [],
+  allowMethods: DEFAULT_ALLOW_METHODS
+}

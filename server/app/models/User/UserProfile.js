@@ -1,6 +1,7 @@
-import {Model, resolver} from '@orion-js/app'
+import {resolver} from '@orion-js/resolvers'
+import {createModel} from '@orion-js/models'
 
-export default new Model({
+export default createModel({
   name: 'UserProfile',
   schema: {
     firstName: {
@@ -24,7 +25,7 @@ export default new Model({
     name: resolver({
       name: 'name',
       returns: String,
-      resolve: async function(profile) {
+      resolve: async function (profile) {
         return profile.firstName
       }
     })

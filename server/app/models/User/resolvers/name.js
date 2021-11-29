@@ -1,4 +1,4 @@
-import {resolver} from '@orion-js/app'
+import {resolver} from '@orion-js/resolvers'
 
 export default resolver({
   returns: String,

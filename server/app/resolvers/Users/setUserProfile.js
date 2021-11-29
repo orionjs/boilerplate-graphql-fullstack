@@ -1,5 +1,5 @@
 import Users from 'app/collections/Users'
-import {resolver} from '@orion-js/app'
+import {resolver} from '@orion-js/resolvers'
 import User from 'app/models/User'
 import UserProfile from 'app/models/User/UserProfile'
 

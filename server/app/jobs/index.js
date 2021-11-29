@@ -1,3 +1,3 @@
-import {start} from '@orion-js/jobs'
+import {init} from '@orion-js/jobs'
 
-start({})
+init({jobs: {}})
