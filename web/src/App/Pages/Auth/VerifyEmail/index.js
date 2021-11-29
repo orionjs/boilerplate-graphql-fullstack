@@ -6,13 +6,15 @@ import autobind from 'autobind-decorator'
 import styles from './styles.css'
 import Loading from 'orionsoft-parts/lib/components/Loading'
 import sleep from 'orionsoft-parts/lib/helpers/sleep'
-import setSession from 'App/helpers/auth/setSession'
+import {setSession} from '@orion-js/graphql-client'
+import Translate from 'App/i18n'
 
 @withMutation(gql`
   mutation verifyEmail($token: String) {
     session: verifyEmail(token: $token) {
       _id
       userId
+      roles
       publicKey
       secretKey
     }
@@ -38,11 +40,11 @@ export default class VerifyEmail extends React.Component {
       const {session} = await this.props.verifyEmail({
         token: this.props.token
       })
-      setSession(session)
+      await setSession(session)
       this.props.onLogin()
     } catch (error) {
       if (error.message.includes('Validation Error')) {
-        this.setState({errorMessage: 'El código de verificación expiró'})
+        this.setState({errorMessage: <Translate tr="auth.emailVerficationCodeExpired" />})
       } else {
         this.setState({errorMessage: error.message})
       }
@@ -56,7 +58,9 @@ export default class VerifyEmail extends React.Component {
     return (
       <div className={styles.loading}>
         <Loading size={40} />
-        <p>Se esta verificando tu email</p>
+        <p>
+          <Translate tr="auth.weAreVerifyingYourEmail" />
+        </p>
       </div>
     )
   }

@@ -1,21 +1,24 @@
 import React from 'react'
 import authRouteRegex from './Auth/routeRegex'
-import {withRouter} from 'react-router'
-import PropTypes from 'prop-types'
 import DynamicComponent from 'App/components/DynamicComponent'
 import App from './App'
+import useRouter from 'App/hooks/useRouter'
+import SuspenseLoading from 'App/components/SuspenseLoading'
 
-@withRouter
-export default class Pages extends React.Component {
-  static propTypes = {
-    location: PropTypes.object
-  }
+const Auth = DynamicComponent(() => import('./Auth'))
 
-  render() {
-    if (authRouteRegex.test(this.props.location.pathname)) {
-      const Component = DynamicComponent(() => import('./Auth'))
-      return <Component />
-    }
-    return <App />
+const Page = function() {
+  const {location} = useRouter()
+  if (authRouteRegex.test(location.pathname)) {
+    return <Auth />
   }
+  return <App />
+}
+
+export default function Pages() {
+  return (
+    <SuspenseLoading>
+      <Page />
+    </SuspenseLoading>
+  )
 }

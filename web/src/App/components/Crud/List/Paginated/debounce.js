@@ -19,7 +19,8 @@ export default function(Child) {
       this.setState({props, debouncing: false})
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (isEqual(nextProps.variables, this.props.variables)) {
         this.didRecieveProps(nextProps)
       } else {

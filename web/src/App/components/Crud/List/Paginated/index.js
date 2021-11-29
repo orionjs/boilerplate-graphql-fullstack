@@ -1,18 +1,20 @@
 import React from 'react'
 import Data from './Data'
-import {graphql} from 'react-apollo'
 import gql from 'graphql-tag'
 import getQueryFields from './getQueryFields'
 import {getArguments, getParams} from './getParams'
 import Head from './Head'
 import autobind from 'autobind-decorator'
-import debounce from './debounce'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import LoadingIndicator from './LoadingIndicator'
+import Query from './Query'
+import getQueryParam from 'orionsoft-parts/lib/helpers/getQueryParam'
+import setQueryParam from 'orionsoft-parts/lib/helpers/setQueryParam'
 
 export default class Fetch extends React.Component {
   static propTypes = {
+    footer: PropTypes.any,
     /**
      * Head title
      */
@@ -37,6 +39,7 @@ export default class Fetch extends React.Component {
      * Name of the query. Ex: backendEvents, producers
      */
     queryName: PropTypes.string.isRequired,
+    queryFunctionName: PropTypes.string,
     /**
      * Fields to display
      */
@@ -92,7 +95,11 @@ export default class Fetch extends React.Component {
     /**
      * Loading component
      */
-    loadingComponent: PropTypes.any
+    loadingComponent: PropTypes.any,
+    /**
+     * Variables
+     */
+    variables: PropTypes.object
   }
 
   static defaultProps = {
@@ -107,25 +114,19 @@ export default class Fetch extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      page: 1,
-      limit: this.props.defaultLimit,
+      page: Number(getQueryParam('page')) || 1,
+      limit: Number(getQueryParam('limit')) || this.props.defaultLimit,
       variables: {}
     }
-    this.createChild(props)
   }
 
   // public reload function
   async reload() {
-    return this.refs.child.refs.child.queryObservable.refetch()
+    return this.child.refs.child.queryObservable.refetch()
   }
 
-  componentWillReceiveProps(nextProps) {
-    const newQuery = this.getQuery(nextProps)
-    const currentQuery = this.getQuery(this.props)
-    if (newQuery !== currentQuery) {
-      this.createChild(nextProps)
-    }
-
+  // eslint-disable-next-line
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const newVariables = this.getVariables(nextProps)
     const currentVariables = this.getVariables(this.props)
     if (!isEqual(newVariables, currentVariables) && this.state.page !== 1) {
@@ -133,22 +134,10 @@ export default class Fetch extends React.Component {
     }
   }
 
-  createChild(props) {
-    const queryContainer = graphql(gql([this.getQuery(props)]), {
-      options: ({variables}) => {
-        return {
-          variables,
-          fetchPolicy: 'network-only',
-          pollInterval: this.props.pollInterval ? this.props.pollInterval : null
-        }
-      }
-    })
-    const child = queryContainer(Data)
-    this.Child = debounce(child)
-  }
-
   getQuery(props) {
-    return `query paginated_${props.queryName} (${getArguments(props.params)}) {
+    return `query ${props.queryFunctionName || 'paginated_' + props.queryName} (${getArguments(
+      props.params
+    )}) {
       result: ${props.queryName} (
         ${getParams(props.params)}
       ) {
@@ -181,7 +170,8 @@ export default class Fetch extends React.Component {
       page: this.state.page,
       sortBy: this.state.sortBy || defaultSort.sortBy,
       sortType: this.state.sortType || defaultSort.sortType,
-      ...this.state.variables
+      ...this.state.variables,
+      ...this.props.variables
     }
     return variables
   }
@@ -203,7 +193,7 @@ export default class Fetch extends React.Component {
     return (
       <div className="paginated-root">
         <Head
-          ref="head"
+          ref={head => (this.head = head)}
           title={this.props.headTitle}
           bottomComponent={this.props.headBottomComponent}
           leftComponent={this.props.headLeftComponent}
@@ -212,21 +202,37 @@ export default class Fetch extends React.Component {
           variables={variables}
           setVariable={this.setVariable}
         />
-        <this.Child
-          ref="child"
-          selectedItemId={this.props.selectedItemId}
+        <Query
+          fetchPolicy="network-only"
+          query={gql([this.getQuery(this.props)])}
           variables={variables}
-          onPress={this.props.onPress}
-          fields={this.props.fields}
-          sortBy={variables.sortBy}
-          sortType={variables.sortType}
-          setSort={this.setSort}
-          page={variables.page}
-          setPage={page => this.setState({page})}
-          limit={variables.limit}
-          setLimit={limit => this.setState({limit})}
-          loadingComponent={this.props.loadingComponent}
-        />
+          pollInterval={this.props.pollInterval}>
+          {({data, loading}) => (
+            <Data
+              ref={child => (this.child = child)}
+              data={data}
+              loading={loading}
+              selectedItemId={this.props.selectedItemId}
+              onPress={this.props.onPress}
+              fields={this.props.fields}
+              sortBy={variables.sortBy}
+              sortType={variables.sortType}
+              setSort={this.setSort}
+              page={variables.page}
+              setPage={page => {
+                setQueryParam('page', page)
+                this.setState({page})
+              }}
+              limit={variables.limit}
+              setLimit={limit => {
+                setQueryParam('limit', limit)
+                this.setState({limit})
+              }}
+              loadingComponent={this.props.loadingComponent}
+              footer={this.props.footer}
+            />
+          )}
+        </Query>
       </div>
     )
   }

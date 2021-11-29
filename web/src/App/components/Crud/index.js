@@ -5,7 +5,6 @@ import List from './List'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Delete from './Delete'
-import includes from 'lodash/includes'
 
 export default class CrudComponent extends React.Component {
   static propTypes = {
@@ -27,7 +26,7 @@ export default class CrudComponent extends React.Component {
   }
 
   renderList() {
-    if (includes(this.props.omit, 'list')) return <span />
+    if (this.props.omit.includes('list')) return <span />
     return (
       <List
         title={this.props.plural}
@@ -36,14 +35,14 @@ export default class CrudComponent extends React.Component {
         basePath={this.props.path}
         fields={this.props.listFields}
         allowSearch={this.props.allowSearch}
-        canCreate={!includes(this.props.omit, 'create')}
-        canUpdate={!includes(this.props.omit, 'update')}
+        canCreate={!this.props.omit.includes('create')}
+        canUpdate={!this.props.omit.includes('update')}
       />
     )
   }
 
   renderUpdate({match}) {
-    if (includes(this.props.omit, 'update')) return <span />
+    if (this.props.omit.includes('update')) return <span />
     return (
       <Update
         title={`Update ${this.props.singular}`}
@@ -57,7 +56,7 @@ export default class CrudComponent extends React.Component {
   }
 
   renderCreate() {
-    if (includes(this.props.omit, 'create')) return <span />
+    if (this.props.omit.includes('create')) return <span />
     return (
       <Create
         title={`Create ${this.props.singular}`}
@@ -69,7 +68,7 @@ export default class CrudComponent extends React.Component {
   }
 
   renderDelete({match}) {
-    if (includes(this.props.omit, 'delete')) return <span />
+    if (this.props.omit.includes('delete')) return <span />
     return (
       <Delete
         title={`Delete ${this.props.singular}`}

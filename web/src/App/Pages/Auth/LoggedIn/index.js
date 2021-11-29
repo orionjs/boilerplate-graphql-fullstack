@@ -4,6 +4,7 @@ import Button from 'orionsoft-parts/lib/components/Button'
 import logout from 'App/helpers/auth/logout'
 import {withRouter} from 'react-router'
 import PropTypes from 'prop-types'
+import Translate from 'App/i18n'
 
 @withRouter
 export default class Logout extends React.Component {
@@ -18,10 +19,14 @@ export default class Logout extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <p>You are already logged in, please log out first</p>
-        <Button onClick={() => this.props.history.push('/')}>Go Home</Button>
+        <p>
+          <Translate tr="auth.youAreLoggedIn" />
+        </p>
+        <Button onClick={() => this.props.history.push('/')}>
+          <Translate tr="auth.goHome" />
+        </Button>
         <Button onClick={this.logout} danger>
-          Sign out
+          <Translate tr="auth.signOut" />
         </Button>
       </div>
     )

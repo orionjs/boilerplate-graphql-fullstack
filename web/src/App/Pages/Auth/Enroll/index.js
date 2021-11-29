@@ -4,6 +4,6 @@ export default class Component extends React.Component {
   static propTypes = {}
 
   render() {
-    return <div>Hello</div>
+    return <div>todo</div>
   }
 }
