@@ -16,7 +16,7 @@
     "babel-polyfill": "^6.26.0",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "numeral": "^2.0.6",
     "orionjs-react-autoform": "^1.2.1",
     "orionsoft-parts": "^1.15.17",
